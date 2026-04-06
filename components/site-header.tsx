@@ -22,6 +22,12 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-8">
           <Link
+            href="/blog"
+            className="rounded-md py-1 font-sans text-sm font-medium text-muted-foreground outline-none ring-offset-2 ring-offset-black transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-white/30 sm:text-base"
+          >
+            Blog
+          </Link>
+          <Link
             href="/product"
             className="rounded-md py-1 font-sans text-sm font-medium text-muted-foreground outline-none ring-offset-2 ring-offset-black transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-white/30 sm:text-base"
           >

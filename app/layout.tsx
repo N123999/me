@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   title: "Yu",
   description:
     "Productivity-minded software — tools, agents, and desktop experiments.",
+  icons: {
+    icon: [{ url: "/logo/N123999.png", type: "image/png" }],
+    shortcut: "/logo/N123999.png",
+    apple: "/logo/N123999.png",
+  },
 };
 
 export default function RootLayout({
