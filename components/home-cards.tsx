@@ -17,7 +17,7 @@ const rowCellMin = "h-full min-h-[260px] md:min-h-[360px]";
 export function HomeCards() {
   return (
     <section
-      className="border-t border-white/10 bg-black px-5 py-16 sm:px-10 md:py-24"
+      className="bg-black px-5 pb-16 pt-6 sm:px-10 sm:pt-8 md:pb-24 md:pt-10"
       aria-label="Milestones"
     >
       <div className="mx-auto max-w-6xl">

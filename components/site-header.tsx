@@ -10,7 +10,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 shrink-0 border-b border-white/10 bg-black pt-[env(safe-area-inset-top)]">
       <nav
-        className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-10 sm:py-5 md:px-12"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-2.5 sm:px-10 sm:py-3 md:px-12"
         aria-label="Main navigation"
       >
         <Link
