@@ -29,6 +29,17 @@ export default function Home() {
 
       <HomeCards />
       <HomeBlog />
+
+      <section
+        className="flex flex-col items-center justify-center px-6 py-16 sm:py-20 md:py-28"
+        aria-label="Closing"
+      >
+        <p
+          className={`${plusJakarta.className} text-center text-[clamp(4.5rem,18vmin,14rem)] font-semibold leading-none tracking-tight text-foreground`}
+        >
+          Bye
+        </p>
+      </section>
     </main>
   );
 }

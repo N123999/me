@@ -1,18 +1,6 @@
 import Link from "next/link";
-import {
-  type BlogCoverVariant,
-  getLatestBlogPosts,
-} from "@/data/blog-posts";
-import { cn } from "@/lib/utils";
-
-const coverStyles: Record<BlogCoverVariant, string> = {
-  violet:
-    "bg-gradient-to-br from-zinc-900 via-fuchsia-500/25 to-black [background-size:145%_145%]",
-  blue:
-    "bg-gradient-to-br from-zinc-900 via-sky-400/22 to-black [background-size:145%_145%]",
-  slate:
-    "bg-gradient-to-br from-zinc-700/90 via-zinc-800 to-black [background-size:145%_145%]",
-};
+import { getLatestBlogPosts } from "@/data/blog-posts";
+import { MeshDiffuseCover } from "@/components/mesh-diffuse-cover";
 
 function formatBlogDate(iso: string): string {
   return new Intl.DateTimeFormat("en-US", {
@@ -23,7 +11,7 @@ function formatBlogDate(iso: string): string {
 }
 
 /**
- * 首页 Blog：三列栅格。仅顶区为色块/渐变（收束到黑底），标题与摘要直接落在页面黑底上，无独立文案区衬底、无图标。
+ * 首页 Blog：三列栅格。顶区为 MeshDiffuseCover 弥散层，标题与摘要直接落在页面黑底上。
  */
 export function HomeBlog() {
   const posts = getLatestBlogPosts(3);
@@ -49,15 +37,10 @@ export function HomeBlog() {
                 className="block h-full min-w-0 outline-none transition-opacity hover:opacity-95 focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               >
                 <article className="flex h-full min-h-[19rem] flex-col">
-                  <div
-                    className={cn(
-                      "relative h-44 shrink-0 overflow-hidden rounded-[4px] sm:h-48",
-                      coverStyles[post.cover],
-                    )}
-                    aria-hidden
-                  >
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_55%_at_50%_18%,rgba(255,255,255,0.08),transparent_68%)]" />
-                  </div>
+                  <MeshDiffuseCover
+                    variant={post.cover}
+                    className="h-44 shrink-0 rounded-[4px] sm:h-48"
+                  />
 
                   <div className="flex min-h-0 flex-1 flex-col gap-3 pt-4">
                     <h3 className="font-sans text-[0.9375rem] font-semibold leading-snug tracking-tight text-foreground line-clamp-2 sm:text-base">
