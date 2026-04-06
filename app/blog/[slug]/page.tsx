@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug, blogPosts } from "@/data/blog-posts";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getBlogPostBySlug, getPost, getPostSlugs } from "@/lib/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
+  return getPostSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,8 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
-  if (!post) notFound();
+  const payload = getPost(slug);
+  if (!payload) notFound();
+  const { meta: post, body } = payload;
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-16 sm:px-8 md:py-24">
@@ -50,10 +52,11 @@ export default async function BlogPostPage({ params }: Props) {
           <span className="px-1.5 opacity-50">·</span>
           {post.readingMinutes} min read
         </p>
-        <p className="mt-10 font-sans text-base leading-relaxed text-muted-foreground">
-          Full post body will live here (MDX or CMS). For now this route exists
-          so cards on the homepage link to a real destination.
-        </p>
+        <div
+          className="prose prose-invert mt-10 max-w-none font-sans prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-white/10 prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-white/5"
+        >
+          <MDXRemote source={body} />
+        </div>
       </article>
     </main>
   );

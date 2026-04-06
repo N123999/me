@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllBlogPostsSorted } from "@/data/blog-posts";
+import { getAllBlogPostsSorted } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog · Yu",

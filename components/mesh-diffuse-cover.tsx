@@ -1,7 +1,7 @@
 "use client";
 
 import { MeshGradient } from "@mesh-gradient/react";
-import type { BlogCoverVariant } from "@/data/blog-posts";
+import type { BlogCoverVariant } from "@/lib/blog";
 import { cn } from "@/lib/utils";
 
 /**
