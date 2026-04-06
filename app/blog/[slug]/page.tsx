@@ -31,7 +31,9 @@ export default async function BlogPostPage({ params }: Props) {
           Home
         </Link>
         <span className="px-2 opacity-50">/</span>
-        <span>Blog</span>
+        <Link href="/blog" className="transition-colors hover:text-foreground">
+          Blog
+        </Link>
       </p>
       <article className="mt-10">
         <h1 className="font-sans text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-4xl">

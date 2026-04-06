@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getLatestBlogPosts } from "@/data/blog-posts";
 import { MeshDiffuseCover } from "@/components/mesh-diffuse-cover";
 
@@ -26,7 +27,16 @@ export function HomeBlog() {
           id="home-blog-heading"
           className="font-sans text-sm font-medium tracking-tight text-muted-foreground"
         >
-          Blog
+          <Link
+            href="/blog"
+            className="group inline-flex items-center gap-1.5 outline-none transition-colors hover:text-foreground focus-visible:rounded-[4px] focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
+            Blog
+            <ArrowRight
+              className="size-4 shrink-0 opacity-70 transition-transform duration-200 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5"
+              aria-hidden
+            />
+          </Link>
         </h2>
 
         <ul className="mt-8 grid list-none grid-cols-1 gap-6 md:grid-cols-3 md:items-stretch md:gap-8">

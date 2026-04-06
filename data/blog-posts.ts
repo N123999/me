@@ -46,7 +46,12 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export function getLatestBlogPosts(limit = 3): BlogPost[] {
+  return getAllBlogPostsSorted().slice(0, limit);
+}
+
+/** 全部文章，按发布日期从新到旧 */
+export function getAllBlogPostsSorted(): BlogPost[] {
   return [...blogPosts].sort(
     (a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt),
-  ).slice(0, limit);
+  );
 }
