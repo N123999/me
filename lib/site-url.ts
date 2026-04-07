@@ -6,10 +6,9 @@ export function getSiteBaseUrl(): URL {
   return new URL(raw.endsWith("/") ? raw : `${raw}/`);
 }
 
+/** 与 `localePrefix: "always"` 一致（含默认 en-US）。 */
 export function localeHref(locale: string, pathname: string): string {
   const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  if (locale === "en-US") {
-    return path === "" ? "/" : path;
-  }
-  return path === "/" ? `/${locale}` : `/${locale}${path}`;
+  const tail = path === "/" ? "" : path;
+  return `/${locale}${tail}`;
 }
