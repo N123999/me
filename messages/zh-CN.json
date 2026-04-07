@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "siteTitle": "Yu",
+    "siteDescription": "偏生产力取向的软件：工具、智能体与桌面实验。",
+    "blogTitle": "Blog · Yu",
+    "blogDescription": "关于生产力、工具与设计的写作。"
+  },
+  "nav": {
+    "mainAria": "主导航",
+    "homeAria": "Yu — 首页",
+    "product": "产品"
+  },
+  "home": {
+    "cardsSectionAria": "里程碑",
+    "closingSectionAria": "收尾"
+  },
+  "blog": {
+    "breadcrumbHome": "首页",
+    "pageHeading": "Blog",
+    "pageIntro": "随笔与长文思考。",
+    "minRead": "约 {minutes} 分钟"
+  },
+  "footer": {
+    "navAria": "页脚",
+    "externalAria": "外部链接",
+    "language": "语言",
+    "columns": {
+      "product": "产品",
+      "writing": "写作",
+      "site": "站点",
+      "credits": "鸣谢"
+    },
+    "linkHome": "首页",
+    "copyrightLine": "© {year} Yu. Productivity, tools, design."
+  },
+  "theme": {
+    "groupAria": "浅色 / 深色（界面预览，未接入主题）",
+    "light": "浅色",
+    "dark": "深色"
+  },
+  "post": {
+    "metadataFallbackTitle": "文章"
+  }
+}

@@ -1,10 +1,11 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getLatestBlogPosts } from "@/lib/blog";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { MeshDiffuseCover } from "@/components/mesh-diffuse-cover";
+import { getLatestBlogPosts } from "@/lib/blog";
 
-function formatBlogDate(iso: string): string {
-  return new Intl.DateTimeFormat("en-US", {
+function formatBlogDate(iso: string, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -14,8 +15,10 @@ function formatBlogDate(iso: string): string {
 /**
  * 首页 Blog：三列栅格。顶区为 MeshDiffuseCover 弥散层，标题与摘要直接落在页面黑底上。
  */
-export function HomeBlog() {
+export async function HomeBlog() {
   const posts = getLatestBlogPosts(3);
+  const locale = await getLocale();
+  const t = await getTranslations("blog");
 
   return (
     <section
@@ -61,10 +64,12 @@ export function HomeBlog() {
                     </p>
                     <p className="mt-1 font-sans text-xs text-muted-foreground/80 sm:text-[0.8125rem]">
                       <time dateTime={post.publishedAt}>
-                        {formatBlogDate(post.publishedAt)}
+                        {formatBlogDate(post.publishedAt, locale)}
                       </time>
                       <span aria-hidden> · </span>
-                      <span>{post.readingMinutes} min read</span>
+                      <span>
+                        {t("minRead", { minutes: post.readingMinutes })}
+                      </span>
                     </p>
                   </div>
                 </article>

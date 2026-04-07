@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 /** 设计稿「4」= 4px 圆角（不是 Tailwind 的 `rounded-4xl` 尺寸）。 */
 const cardRadius = "rounded-[4px]";
@@ -14,11 +15,13 @@ const rowCellMin = "h-full min-h-[260px] md:min-h-[360px]";
  * 6 列栅格 — 行1：[2 列窄][4 列宽]；行2：[4 列宽][2 列窄]（底行宽左窄右）。
  * 内容：行1 Spirit | Launcher；行2 IDK | Coming soon。
  */
-export function HomeCards() {
+export async function HomeCards() {
+  const t = await getTranslations("home");
+
   return (
     <section
       className="bg-black px-5 pb-16 pt-6 sm:px-10 sm:pt-8 md:pb-24 md:pt-10"
-      aria-label="Milestones"
+      aria-label={t("cardsSectionAria")}
     >
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-6 md:items-stretch md:gap-8">

@@ -1,0 +1,95 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
+import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { routing } from "@/i18n/routing";
+import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
+import "../globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const base = getSiteBaseUrl();
+
+  return {
+    metadataBase: base,
+    title: t("siteTitle"),
+    description: t("siteDescription"),
+    icons: {
+      icon: [{ url: "/logo/N123999.png", type: "image/png" }],
+      shortcut: "/logo/N123999.png",
+      apple: "/logo/N123999.png",
+    },
+    alternates: {
+      canonical: new URL(localeHref(locale, "/"), base).toString(),
+      languages: Object.fromEntries(
+        routing.locales.map((loc) => [
+          loc,
+          new URL(localeHref(loc, "/"), base).toString(),
+        ]),
+      ),
+    },
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+}>) {
+  const { locale } = await params;
+  if (
+    !routing.locales.includes(locale as (typeof routing.locales)[number])
+  ) {
+    notFound();
+  }
+  setRequestLocale(locale);
+  const messages = await getMessages();
+
+  return (
+    <html
+      lang={locale === "zh-CN" ? "zh-Hans" : "en"}
+      data-locale={locale}
+      className={`${inter.variable} h-full antialiased`}
+    >
+      <head>
+        {locale === "zh-CN" ? (
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        ) : null}
+      </head>
+      <body className="flex min-h-dvh flex-col bg-black">
+        <NextIntlClientProvider messages={messages}>
+          <SiteHeader />
+          <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+          <SiteFooter />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

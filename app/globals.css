@@ -8,7 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  /* 英文模式：全文 Inter。中文模式在下方 html[data-locale="zh-CN"] 中追加 Noto 作 CJK 回退 */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -47,6 +48,12 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* zh-CN：拉丁文仍用 Inter；缺字（中文）回落到 Noto Sans SC（与 layout 中 Google Fonts link 对应） */
+html[data-locale="zh-CN"] {
+  --font-sans: var(--font-inter), "Noto Sans SC", ui-sans-serif, system-ui,
+    sans-serif;
 }
 
 :root {

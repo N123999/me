@@ -1,4 +1,5 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { getTranslations } from "next-intl/server";
 import { HomeBlog } from "@/components/home-blog";
 import { HomeCards } from "@/components/home-cards";
 
@@ -7,7 +8,9 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["500", "600"],
 });
 
-export default function Home() {
+export default async function HomePage() {
+  const t = await getTranslations("home");
+
   return (
     <main className="flex flex-col">
       {/*
@@ -32,7 +35,7 @@ export default function Home() {
 
       <section
         className="flex flex-col items-center justify-center px-6 py-16 sm:py-20 md:py-28"
-        aria-label="Closing"
+        aria-label={t("closingSectionAria")}
       >
         <p
           className={`${plusJakarta.className} text-center text-[clamp(4.5rem,18vmin,14rem)] font-semibold leading-none tracking-tight text-foreground`}

@@ -1,7 +1,8 @@
-import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
+import { getTranslations } from "next-intl/server";
 import { FooterLocaleSwitch } from "@/components/footer-locale-switch";
 import { FooterThemeSwitch } from "@/components/footer-theme-switch";
+import { Link } from "@/i18n/navigation";
 
 /** lucide-react 1.x 无 Github 图标导出 */
 function GitHubMark(props: SVGProps<SVGSVGElement>) {
@@ -12,29 +13,40 @@ function GitHubMark(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-type FooterColumn = {
-  title: string;
-  items: { label: string; href: string; external?: boolean }[];
+type FooterItem = {
+  label: string;
+  href: string;
+  external?: boolean;
 };
 
-const columns: FooterColumn[] = [
+type FooterColumnDef = {
+  id: string;
+  titleKey: "product" | "writing" | "site" | "credits";
+  items: FooterItem[];
+};
+
+const columnDefs: FooterColumnDef[] = [
   {
-    title: "Product",
+    id: "product",
+    titleKey: "product",
     items: [
       { label: "Spirit Studio", href: "/product" },
       { label: "Launcher", href: "/launcher" },
     ],
   },
   {
-    title: "Writing",
+    id: "writing",
+    titleKey: "writing",
     items: [{ label: "Blog", href: "/blog" }],
   },
   {
-    title: "Site",
-    items: [{ label: "Home", href: "/" }],
+    id: "site",
+    titleKey: "site",
+    items: [{ label: "__HOME__", href: "/" }],
   },
   {
-    title: "Credits",
+    id: "credits",
+    titleKey: "credits",
     items: [
       {
         label: "Mesh gradient",
@@ -62,24 +74,35 @@ const externalIconLinkClassName =
 /**
  * 全站底栏：分区制。区名句首大写、`text-sm`、正文色；链默认半透明，Hover 回到正文色。
  */
-export function SiteFooter() {
+export async function SiteFooter() {
   const year = new Date().getFullYear();
+  const t = await getTranslations("footer");
+  const tc = await getTranslations("footer.columns");
+
+  const columns = columnDefs.map((col) => ({
+    ...col,
+    title: tc(col.titleKey),
+    items: col.items.map((item) => ({
+      ...item,
+      label: item.label === "__HOME__" ? t("linkHome") : item.label,
+    })),
+  }));
 
   return (
     <footer className="shrink-0 bg-black pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-16 sm:pt-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-10 md:px-12">
         <nav
           className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4"
-          aria-label="Footer"
+          aria-label={t("navAria")}
         >
           {columns.map((col) => (
-            <div key={col.title} className="min-w-0">
+            <div key={col.id} className="min-w-0">
               <p className="mb-4 font-sans text-sm font-medium tracking-tight text-foreground">
                 {col.title}
               </p>
               <ul className="flex flex-col gap-3">
                 {col.items.map((item) => (
-                  <li key={`${col.title}-${item.label}`}>
+                  <li key={`${col.id}-${item.label}`}>
                     {item.external ? (
                       <a
                         href={item.href}
@@ -108,11 +131,11 @@ export function SiteFooter() {
           */}
           <div className="relative flex flex-col gap-4 sm:min-h-7 sm:flex-row sm:items-center">
             <p className="order-3 w-full text-left font-sans text-xs text-foreground/35 sm:order-1 sm:min-w-0 sm:flex-1">
-              © {year} Yu. Productivity, tools, design.
+              {t("copyrightLine", { year })}
             </p>
             <ul
               className="order-2 flex list-none flex-wrap items-center justify-center sm:absolute sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2"
-              aria-label="External links"
+              aria-label={t("externalAria")}
             >
               {externalBarLinks.map((item) => {
                 const Icon = item.Icon;

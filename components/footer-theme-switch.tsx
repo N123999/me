@@ -1,6 +1,7 @@
 "use client";
 
 import type { SVGProps } from "react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -39,17 +40,18 @@ function IconMoon(props: SVGProps<SVGSVGElement>) {
  */
 export function FooterThemeSwitch() {
   const [scheme, setScheme] = useState<SchemePreview>("dark");
+  const t = useTranslations("theme");
 
   const items = [
-    { id: "light" as const, Icon: IconSun, label: "浅色" },
-    { id: "dark" as const, Icon: IconMoon, label: "深色" },
+    { id: "light" as const, Icon: IconSun, label: t("light") },
+    { id: "dark" as const, Icon: IconMoon, label: t("dark") },
   ];
 
   return (
     <div
       className="inline-flex rounded-[4px] border border-white/10 bg-white/[0.04] p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
       role="group"
-      aria-label="浅色 / 深色（界面预览，未接入主题）"
+      aria-label={t("groupAria")}
     >
       {items.map(({ id, Icon, label }) => (
         <button

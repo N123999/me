@@ -1,52 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import type { AppLocale } from "@/i18n/routing";
 
-export type SiteLocaleCode = "en" | "zh";
-
-const LOCALES: { code: SiteLocaleCode; label: string }[] = [
-  { code: "en", label: "EN" },
-  { code: "zh", label: "中文" },
+const LOCALES: { code: AppLocale; label: string }[] = [
+  { code: "en-US", label: "EN" },
+  { code: "zh-CN", label: "中文" },
 ];
 
-const STORAGE_KEY = "site-locale";
-
-function readStoredLocale(): SiteLocaleCode {
-  if (typeof window === "undefined") return "en";
-  const v = window.localStorage.getItem(STORAGE_KEY);
-  return v === "zh" ? "zh" : "en";
-}
-
 /**
- * 底栏语言切换：先落 localStorage + document.lang，便于后续接 next-intl / 路由前缀。
+ * 底栏语言切换：写入 next-intl 路由（默认 en-US 无前缀）。
  */
 export function FooterLocaleSwitch() {
-  const [locale, setLocale] = useState<SiteLocaleCode>("en");
-
-  useEffect(() => {
-    setLocale(readStoredLocale());
-  }, []);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.documentElement.lang = locale === "zh" ? "zh-Hans" : "en";
-  }, [locale]);
-
-  const select = (code: SiteLocaleCode) => {
-    setLocale(code);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, code);
-    } catch {
-      /* private mode 等 */
-    }
-  };
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const t = useTranslations("footer");
 
   return (
     <div
       className="flex items-center gap-1 font-sans text-xs"
       role="group"
-      aria-label="Language"
+      aria-label={t("language")}
     >
       {LOCALES.map(({ code, label }, i) => (
         <span key={code} className="flex items-center gap-1">
@@ -57,7 +34,7 @@ export function FooterLocaleSwitch() {
           ) : null}
           <button
             type="button"
-            onClick={() => select(code)}
+            onClick={() => router.replace(pathname, { locale: code })}
             className={cn(
               "rounded px-1.5 py-0.5 outline-none transition-colors",
               locale === code

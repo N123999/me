@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "siteTitle": "Yu",
+    "siteDescription": "Productivity-minded software — tools, agents, and desktop experiments.",
+    "blogTitle": "Blog · Yu",
+    "blogDescription": "Writing on productivity, tools, and design."
+  },
+  "nav": {
+    "mainAria": "Main navigation",
+    "homeAria": "Yu — Home",
+    "product": "Product"
+  },
+  "home": {
+    "cardsSectionAria": "Milestones",
+    "closingSectionAria": "Closing"
+  },
+  "blog": {
+    "breadcrumbHome": "Home",
+    "pageHeading": "Blog",
+    "pageIntro": "Notes and longer-form thoughts.",
+    "minRead": "{minutes} min read"
+  },
+  "footer": {
+    "navAria": "Footer",
+    "externalAria": "External links",
+    "language": "Language",
+    "columns": {
+      "product": "Product",
+      "writing": "Writing",
+      "site": "Site",
+      "credits": "Credits"
+    },
+    "linkHome": "Home",
+    "copyrightLine": "© {year} Yu. Productivity, tools, design."
+  },
+  "theme": {
+    "groupAria": "Light / dark (preview, not wired to theme system)",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "post": {
+    "metadataFallbackTitle": "Post"
+  }
+}
