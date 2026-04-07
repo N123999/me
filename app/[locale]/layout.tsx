@@ -24,12 +24,16 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+/** 仅 `[locale]` 已列出的语言；未知 locale 不回落到 Node SSR，利于 Cloudflare next-on-pages 识别为纯静态。 */
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "meta" });
   const base = getSiteBaseUrl();
 

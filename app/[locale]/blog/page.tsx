@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllBlogPostsSorted } from "@/lib/blog";
@@ -11,6 +11,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "meta" });
   const base = getSiteBaseUrl();
   const path = "/blog";
@@ -40,6 +41,7 @@ function formatDate(iso: string, locale: string): string {
 
 export default async function BlogIndexPage({ params }: PageProps) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const posts = getAllBlogPostsSorted();
   const t = await getTranslations({ locale, namespace: "blog" });
 

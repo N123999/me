@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
@@ -13,8 +13,12 @@ export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
 }
 
+/** 未在构建期列出的 slug 直接 404，避免生成 Node fallback（Cloudflare next-on-pages）。 */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getBlogPostBySlug(slug);
   const tPost = await getTranslations({ locale, namespace: "post" });
   const base = getSiteBaseUrl();
@@ -41,6 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const payload = getPost(slug);
   if (!payload) notFound();
   const { meta: post, body } = payload;
