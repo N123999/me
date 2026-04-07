@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
+import { FooterLocaleSwitch } from "@/components/footer-locale-switch";
+import { FooterThemeSwitch } from "@/components/footer-theme-switch";
 
 /** lucide-react 1.x 无 Github 图标导出 */
 function GitHubMark(props: SVGProps<SVGSVGElement>) {
@@ -100,12 +102,16 @@ export function SiteFooter() {
         </nav>
 
         <div className="mt-16 pt-2">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="order-2 font-sans text-xs text-foreground/35 sm:order-1">
+          {/*
+            移动端：主题+语言居上 → GitHub 居中 → 版权。
+            桌面：版权左 | GitHub 绝对居中 | 主题+语言右（主题在语言左侧）。
+          */}
+          <div className="relative flex flex-col gap-4 sm:min-h-7 sm:flex-row sm:items-center">
+            <p className="order-3 w-full text-left font-sans text-xs text-foreground/35 sm:order-1 sm:min-w-0 sm:flex-1">
               © {year} Yu. Productivity, tools, design.
             </p>
             <ul
-              className="order-1 flex list-none flex-wrap items-center gap-1 sm:order-2"
+              className="order-2 flex list-none flex-wrap items-center justify-center sm:absolute sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2"
               aria-label="External links"
             >
               {externalBarLinks.map((item) => {
@@ -125,6 +131,10 @@ export function SiteFooter() {
                 );
               })}
             </ul>
+            <div className="order-1 flex flex-shrink-0 items-center justify-end gap-3 sm:order-3 sm:flex-1 sm:justify-end sm:gap-4">
+              <FooterThemeSwitch />
+              <FooterLocaleSwitch />
+            </div>
           </div>
         </div>
       </div>
