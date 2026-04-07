@@ -58,7 +58,7 @@ const columnDefs: FooterColumnDef[] = [
 ];
 
 const itemClassName =
-  "inline-flex font-sans text-sm text-foreground/45 outline-none transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:underline focus-visible:underline-offset-4";
+  "inline-flex font-sans text-sm text-muted-foreground outline-none transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:underline focus-visible:underline-offset-4";
 
 const externalBarLinks: {
   href: string;
@@ -69,7 +69,7 @@ const externalBarLinks: {
 ];
 
 const externalIconLinkClassName =
-  "inline-flex rounded-md p-0.5 text-foreground/45 outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black";
+  "inline-flex rounded-md p-0.5 text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 /**
  * 全站底栏：分区制。区名句首大写、`text-sm`、正文色；链默认半透明，Hover 回到正文色。
@@ -89,7 +89,7 @@ export async function SiteFooter() {
   }));
 
   return (
-    <footer className="shrink-0 bg-black pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-16 sm:pt-20">
+    <footer className="shrink-0 bg-background pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-16 sm:pt-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-10 md:px-12">
         <nav
           className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4"
@@ -130,7 +130,7 @@ export async function SiteFooter() {
             桌面：版权左 | GitHub 绝对居中 | 主题+语言右（主题在语言左侧）。
           */}
           <div className="relative flex flex-col gap-4 sm:min-h-7 sm:flex-row sm:items-center">
-            <p className="order-3 w-full text-left font-sans text-xs text-foreground/35 sm:order-1 sm:min-w-0 sm:flex-1">
+            <p className="order-3 w-full text-left font-sans text-xs text-muted-foreground sm:order-1 sm:min-w-0 sm:flex-1">
               {t("copyrightLine", { year })}
             </p>
             <ul

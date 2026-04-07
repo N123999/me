@@ -37,7 +37,7 @@ export function MeshDiffuseCover({
 
   return (
     <div
-      className={cn("relative isolate overflow-hidden bg-black", className)}
+      className={cn("relative isolate overflow-hidden bg-background", className)}
       aria-hidden
     >
       <MeshGradient

@@ -22,7 +22,7 @@ export async function HomeBlog() {
 
   return (
     <section
-      className="bg-black px-5 pb-28 pt-12 sm:px-10 sm:pt-16 md:pb-36 md:pt-20"
+      className="bg-background px-5 pb-28 pt-12 sm:px-10 sm:pt-16 md:pb-36 md:pt-20"
       aria-labelledby="home-blog-heading"
     >
       <div className="mx-auto max-w-6xl">
@@ -32,7 +32,7 @@ export async function HomeBlog() {
         >
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-1.5 outline-none transition-colors hover:text-foreground focus-visible:rounded-[4px] focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="group inline-flex items-center gap-1.5 outline-none transition-colors hover:text-foreground focus-visible:rounded-[4px] focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Blog
             <ArrowRight
@@ -47,7 +47,7 @@ export async function HomeBlog() {
             <li key={post.slug} className="min-w-0">
               <Link
                 href={`/blog/${post.slug}`}
-                className="block min-w-0 outline-none transition-opacity hover:opacity-95 focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="block min-w-0 outline-none transition-opacity hover:opacity-95 focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <article className="flex flex-col">
                   <MeshDiffuseCover

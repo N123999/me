@@ -40,7 +40,7 @@ export function FooterLocaleSwitch() {
               locale === code
                 ? "font-medium text-foreground"
                 : "text-foreground/45 hover:text-foreground",
-              "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+              "focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             )}
           >
             {label}

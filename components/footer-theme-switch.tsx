@@ -2,10 +2,27 @@
 
 import type { SVGProps } from "react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-type SchemePreview = "light" | "dark";
+type SiteTheme = "light" | "dark";
+
+const STORAGE_KEY = "site-theme";
+
+function readThemeFromDom(): SiteTheme {
+  const fromDom = document.documentElement.getAttribute("data-theme");
+  if (fromDom === "light" || fromDom === "dark") return fromDom;
+  return "dark";
+}
+
+function applyTheme(theme: SiteTheme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  try {
+    localStorage.setItem(STORAGE_KEY, theme);
+  } catch {
+    /* private mode 等 */
+  }
+}
 
 function IconSun(props: SVGProps<SVGSVGElement>) {
   return (
@@ -36,20 +53,43 @@ function IconMoon(props: SVGProps<SVGSVGElement>) {
 }
 
 /**
- * 底栏外观稿：浅 / 深分段（图标，仅本地选中态，不接主题系统）。
+ * 与 `<head>` 内联脚本里对 `data-theme` 的写入一致：首帧必须与 SSR 一致（避免 hydration mismatch），
+ * 再在 effect 里与 `document.documentElement` 对齐。
  */
 export function FooterThemeSwitch() {
-  const [scheme, setScheme] = useState<SchemePreview>("dark");
   const t = useTranslations("theme");
+  const [hydrated, setHydrated] = useState(false);
+  const [scheme, setScheme] = useState<SiteTheme>("dark");
+
+  useEffect(() => {
+    setScheme(readThemeFromDom());
+    setHydrated(true);
+  }, []);
 
   const items = [
     { id: "light" as const, Icon: IconSun, label: t("light") },
     { id: "dark" as const, Icon: IconMoon, label: t("dark") },
   ];
 
+  const select = (next: SiteTheme) => {
+    setScheme(next);
+    applyTheme(next);
+  };
+
+  if (!hydrated) {
+    return (
+      <div
+        className="inline-flex h-6 w-[3.25rem] shrink-0 rounded-[4px] border border-border bg-muted/35 p-px"
+        role="status"
+        aria-busy="true"
+        aria-label={t("groupAria")}
+      />
+    );
+  }
+
   return (
     <div
-      className="inline-flex rounded-[4px] border border-white/10 bg-white/[0.04] p-px shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
+      className="inline-flex rounded-[4px] border border-border bg-muted/35 p-px"
       role="group"
       aria-label={t("groupAria")}
     >
@@ -59,13 +99,14 @@ export function FooterThemeSwitch() {
           type="button"
           aria-label={label}
           title={label}
-          onClick={() => setScheme(id)}
+          aria-pressed={scheme === id}
+          onClick={() => select(id)}
           className={cn(
-            "relative flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] transition-[color,background-color,box-shadow] duration-200",
+            "relative flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] transition-[color,background-color] duration-200",
             scheme === id
-              ? "bg-white/12 text-foreground shadow-[0_1px_0_0_rgba(255,255,255,0.06)]"
-              : "text-foreground/40 hover:text-foreground/70",
-            "outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+              ? "bg-accent text-accent-foreground shadow-[0_1px_0_0_oklch(0_0_0/8%)]"
+              : "text-muted-foreground hover:text-foreground",
+            "outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           )}
         >
           <Icon className="size-3" />

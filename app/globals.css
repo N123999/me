@@ -56,73 +56,77 @@ html[data-locale="zh-CN"] {
     sans-serif;
 }
 
-:root {
+/*
+ * 主题由 `html[data-theme="dark" | "light"]` 控制（见 FooterThemeSwitch + layout 内联脚本）。
+ * 深色：纯黑画布（站Current 视觉）。浅色：Apple 式 #FFF 底 + 近 #1D1D1F 正文——不用 FAFAFA，让页面更「产品站 / 编辑感」。
+ */
+html:not([data-theme="light"]) {
   --background: oklch(0 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.12 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.64 0 0);
+  --accent: oklch(0.22 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.58 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
+  --sidebar: oklch(0.12 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.15 0 0);
+  --sidebar-accent: oklch(0.22 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+html[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: oklch(0.22 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.22 0 0);
+  --popover: #ffffff;
+  --popover-foreground: oklch(0.22 0 0);
+  --primary: oklch(0.22 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.22 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.48 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.22 0 0);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 8%);
+  --ring: oklch(0.45 0 0);
+  --chart-1: oklch(0.4 0 0);
+  --chart-2: oklch(0.45 0 0);
+  --chart-3: oklch(0.5 0 0);
+  --chart-4: oklch(0.55 0 0);
+  --chart-5: oklch(0.6 0 0);
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.22 0 0);
+  --sidebar-primary: oklch(0.22 0 0);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.22 0 0);
+  --sidebar-border: oklch(0 0 0 / 8%);
+  --sidebar-ring: oklch(0.45 0 0);
 }
 
 @layer base {
@@ -134,5 +138,17 @@ html[data-locale="zh-CN"] {
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* Blog MDX：深色 invert / 浅色 neutral，随 data-theme 切换 */
+@layer components {
+  html:not([data-theme="light"]) .prose-site,
+  html[data-theme="dark"] .prose-site {
+    @apply prose prose-invert mt-10 max-w-none text-left font-sans prose-headings:text-left prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-left prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-white/10 prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-white/5 prose-li:text-left;
+  }
+
+  html[data-theme="light"] .prose-site {
+    @apply prose prose-neutral mt-10 max-w-none text-left font-sans prose-headings:text-left prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-left prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-black/[0.07] prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-black/[0.04] prose-li:text-left;
   }
 }

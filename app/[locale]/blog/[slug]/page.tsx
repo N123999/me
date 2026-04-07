@@ -74,9 +74,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span className="px-1.5 opacity-50">·</span>
             {t("minRead", { minutes: post.readingMinutes })}
           </p>
-          <div
-            className="prose prose-invert mt-10 max-w-none text-left font-sans prose-headings:text-left prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-left prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-white/10 prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-white/5 prose-li:text-left"
-          >
+          <div className="prose-site">
             <MDXRemote source={body} />
           </div>
         </article>

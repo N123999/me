@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 /** 设计稿「4」= 4px 圆角（不是 Tailwind 的 `rounded-4xl` 尺寸）。 */
 const cardRadius = "rounded-[4px]";
 
-const cardBase = `overflow-hidden ${cardRadius} transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black`;
+const cardBase = `overflow-hidden ${cardRadius} transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background`;
 
 /** 同一行两格等高 */
 const rowCellMin = "h-full min-h-[260px] md:min-h-[360px]";
@@ -20,7 +20,7 @@ export async function HomeCards() {
 
   return (
     <section
-      className="bg-black px-5 pb-16 pt-6 sm:px-10 sm:pt-8 md:pb-24 md:pt-10"
+      className="bg-background px-5 pb-16 pt-6 sm:px-10 sm:pt-8 md:pb-24 md:pt-10"
       aria-label={t("cardsSectionAria")}
     >
       <div className="mx-auto max-w-6xl">

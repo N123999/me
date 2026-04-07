@@ -71,7 +71,7 @@ export default async function BlogIndexPage() {
                 <h2 className="mt-2 font-sans text-xl font-semibold tracking-tight text-foreground">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="outline-none transition-colors hover:text-muted-foreground focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    className="outline-none transition-colors hover:text-muted-foreground focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {post.title}
                   </Link>

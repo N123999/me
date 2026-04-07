@@ -34,7 +34,7 @@
     "copyrightLine": "© {year} Yu. Productivity, tools, design."
   },
   "theme": {
-    "groupAria": "Light / dark (preview, not wired to theme system)",
+    "groupAria": "Color appearance",
     "light": "Light",
     "dark": "Dark"
   },

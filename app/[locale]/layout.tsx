@@ -72,10 +72,18 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale === "zh-CN" ? "zh-Hans" : "en"}
+      data-theme="dark"
       data-locale={locale}
       className={`${inter.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();",
+          }}
+        />
         {locale === "zh-CN" ? (
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
@@ -83,7 +91,7 @@ export default async function LocaleLayout({
           />
         ) : null}
       </head>
-      <body className="flex min-h-dvh flex-col bg-black">
+      <body className="flex min-h-dvh flex-col bg-background text-foreground">
         <NextIntlClientProvider messages={messages}>
           <SiteHeader />
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>

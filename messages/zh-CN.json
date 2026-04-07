@@ -34,7 +34,7 @@
     "copyrightLine": "© {year} Yu. Productivity, tools, design."
   },
   "theme": {
-    "groupAria": "浅色 / 深色（界面预览，未接入主题）",
+    "groupAria": "浅色 / 深色外观",
     "light": "浅色",
     "dark": "深色"
   },
