@@ -9,7 +9,9 @@
   ],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // next-intl middleware 必须在 asset-first 之前运行；否则 HTML 路由常 404（见 CF 文档 run_worker_first）。
+    "run_worker_first": true
   },
   "services": [
     {
