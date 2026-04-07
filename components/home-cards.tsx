@@ -15,8 +15,8 @@ const rowCellMin = "h-full min-h-[260px] md:min-h-[360px]";
  * 6 列栅格 — 行1：[2 列窄][4 列宽]；行2：[4 列宽][2 列窄]（底行宽左窄右）。
  * 内容：行1 Spirit | Launcher；行2 IDK | Coming soon。
  */
-export async function HomeCards() {
-  const t = await getTranslations("home");
+export async function HomeCards({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "home" });
 
   return (
     <section

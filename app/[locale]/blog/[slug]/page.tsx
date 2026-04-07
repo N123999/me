@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
@@ -40,12 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const payload = getPost(slug);
   if (!payload) notFound();
   const { meta: post, body } = payload;
-  const locale = await getLocale();
-  const t = await getTranslations("blog");
+  const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 md:px-12 md:py-24">

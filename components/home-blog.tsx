@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { MeshDiffuseCover } from "@/components/mesh-diffuse-cover";
 import { getLatestBlogPosts } from "@/lib/blog";
@@ -14,11 +14,11 @@ function formatBlogDate(iso: string, locale: string): string {
 
 /**
  * 首页 Blog：三列栅格。顶区为 MeshDiffuseCover 弥散层，标题与摘要直接落在页面黑底上。
+ * `locale` 由 `[locale]/page` 传入，避免 `getLocale()` 把整个页打成 dynamic（Cloudflare next-on-pages 依赖静态/SSG）。
  */
-export async function HomeBlog() {
+export async function HomeBlog({ locale }: { locale: string }) {
   const posts = getLatestBlogPosts(3);
-  const locale = await getLocale();
-  const t = await getTranslations("blog");
+  const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
     <section

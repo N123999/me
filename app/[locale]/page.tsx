@@ -8,8 +8,13 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["500", "600"],
 });
 
-export default async function HomePage() {
-  const t = await getTranslations("home");
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home" });
 
   return (
     <main className="flex flex-col">
@@ -30,8 +35,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <HomeCards />
-      <HomeBlog />
+      <HomeCards locale={locale} />
+      <HomeBlog locale={locale} />
 
       <section
         className="flex flex-col items-center justify-center px-6 py-16 sm:py-20 md:py-28"

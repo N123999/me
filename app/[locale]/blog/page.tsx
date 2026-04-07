@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllBlogPostsSorted } from "@/lib/blog";
 import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
-  const t = await getTranslations("meta");
+type PageProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
   const base = getSiteBaseUrl();
   const path = "/blog";
 
@@ -34,10 +38,10 @@ function formatDate(iso: string, locale: string): string {
   }).format(new Date(iso));
 }
 
-export default async function BlogIndexPage() {
+export default async function BlogIndexPage({ params }: PageProps) {
+  const { locale } = await params;
   const posts = getAllBlogPostsSorted();
-  const locale = await getLocale();
-  const t = await getTranslations("blog");
+  const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 md:px-12 md:py-24">

@@ -7,8 +7,8 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["500", "600"],
 });
 
-export async function SiteHeader() {
-  const t = await getTranslations("nav");
+export async function SiteHeader({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "nav" });
 
   return (
     <header className="sticky top-0 z-50 shrink-0 border-b border-border bg-background pt-[env(safe-area-inset-top)]">

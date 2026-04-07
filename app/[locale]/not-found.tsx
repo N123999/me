@@ -1,8 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 export default async function LocaleNotFound() {
-  const t = await getTranslations("nav");
+  const t = await getTranslations({
+    locale: routing.defaultLocale,
+    namespace: "nav",
+  });
 
   return (
     <main className="mx-auto flex max-w-6xl flex-1 flex-col items-center justify-center px-5 py-24 sm:px-10 md:px-12">

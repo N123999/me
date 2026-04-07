@@ -74,10 +74,10 @@ const externalIconLinkClassName =
 /**
  * 全站底栏：分区制。区名句首大写、`text-sm`、正文色；链默认半透明，Hover 回到正文色。
  */
-export async function SiteFooter() {
+export async function SiteFooter({ locale }: { locale: string }) {
   const year = new Date().getFullYear();
-  const t = await getTranslations("footer");
-  const tc = await getTranslations("footer.columns");
+  const t = await getTranslations({ locale, namespace: "footer" });
+  const tc = await getTranslations({ locale, namespace: "footer.columns" });
 
   const columns = columnDefs.map((col) => ({
     ...col,
