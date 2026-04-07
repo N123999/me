@@ -22,7 +22,7 @@ const PRESETS: Record<
   },
   slate: {
     colors: ["#f4f4f5", "#a1a1aa", "#93c5fd", "#d4d4d8"],
-    seed: 37,
+    seed: 38,
   },
 };
 
@@ -48,7 +48,6 @@ export function MeshDiffuseCover({
           isStatic: true,
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
     </div>
   );
 }
