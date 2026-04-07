@@ -6,12 +6,15 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/site-footer";
+import { ThemeSync } from "@/components/theme-sync";
 import { SiteHeader } from "@/components/site-header";
 import { routing } from "@/i18n/routing";
 import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
+import { parseThemeCookie, THEME_COOKIE } from "@/lib/theme";
 import "../globals.css";
 
 const inter = Inter({
@@ -68,22 +71,18 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
   const messages = await getMessages();
+  const cookieStore = await cookies();
+  const dataTheme = parseThemeCookie(cookieStore.get(THEME_COOKIE)?.value);
 
   return (
     <html
       lang={locale === "zh-CN" ? "zh-Hans" : "en"}
-      data-theme="dark"
+      data-theme={dataTheme}
       data-locale={locale}
       className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();",
-          }}
-        />
         {locale === "zh-CN" ? (
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
@@ -92,6 +91,7 @@ export default async function LocaleLayout({
         ) : null}
       </head>
       <body className="flex min-h-dvh flex-col bg-background text-foreground">
+        <ThemeSync />
         <NextIntlClientProvider messages={messages}>
           <SiteHeader />
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>

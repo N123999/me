@@ -4,10 +4,11 @@ import type { SVGProps } from "react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-
-type SiteTheme = "light" | "dark";
-
-const STORAGE_KEY = "site-theme";
+import {
+  THEME_STORAGE_KEY,
+  themeCookieString,
+  type SiteTheme,
+} from "@/lib/theme";
 
 function readThemeFromDom(): SiteTheme {
   const fromDom = document.documentElement.getAttribute("data-theme");
@@ -18,7 +19,8 @@ function readThemeFromDom(): SiteTheme {
 function applyTheme(theme: SiteTheme) {
   document.documentElement.setAttribute("data-theme", theme);
   try {
-    localStorage.setItem(STORAGE_KEY, theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    document.cookie = themeCookieString(theme);
   } catch {
     /* private mode 等 */
   }
