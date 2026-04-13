@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getBlogPostBySlug, getPost, getPostSlugs } from "@/lib/blog";
@@ -54,7 +55,8 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 md:px-12 md:py-24">
       <div className="max-w-3xl text-left">
-        <p className="font-sans text-sm text-muted-foreground">
+        <p className="relative font-sans text-sm text-muted-foreground">
+          <NavBorderSentinel />
           <Link href="/" className="transition-colors hover:text-foreground">
             {t("breadcrumbHome")}
           </Link>

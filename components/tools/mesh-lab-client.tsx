@@ -12,6 +12,7 @@ import {
   normalizeMeshFrequency,
   type MeshCoverPreset,
 } from "@/lib/mesh-cover-presets";
+import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -155,7 +156,8 @@ export function MeshLabClient() {
   return (
     <div className="mx-auto max-w-5xl px-5 py-10 font-sans sm:px-8">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="text-xs tracking-tight text-muted-foreground tabular-nums">
+        <p className="relative text-xs tracking-tight text-muted-foreground tabular-nums">
+          <NavBorderSentinel />
           {t("pathLabel")}
         </p>
         <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">

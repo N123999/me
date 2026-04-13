@@ -4,17 +4,43 @@ import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { routing } from "@/i18n/routing";
+import {
+  HERO_TITLE_TOP_SENTINEL_ID,
+  NAV_BORDER_SENTINEL_ID,
+} from "@/lib/site-header-sentinel";
 
-/** 与首页大标题顶边对齐，用于判定「Yu」顶端是否已滚过顶栏下沿 */
-const HERO_TITLE_TOP_SENTINEL_ID = "hero-title-top-sentinel";
+type BorderMode = "home" | "navSentinel" | "hidden" | "always";
 
 function isHomePathname(pathname: string): boolean {
   return new RegExp(`^/(${routing.locales.join("|")})/?$`).test(pathname);
 }
 
+/** 占位页：无面包屑载体，Nav 底边线保持隐藏 */
+function isPlaceholderPathname(pathname: string): boolean {
+  return new RegExp(`^/(${routing.locales.join("|")})/(product|launcher)/?$`).test(
+    pathname,
+  );
+}
+
+/** Blog 列表/详情、Mesh Lab：与首页相同 sentinel 判定 */
+function isNavSentinelPathname(pathname: string): boolean {
+  return (
+    new RegExp(`^/(${routing.locales.join("|")})/blog(/|$)`).test(pathname) ||
+    new RegExp(`^/(${routing.locales.join("|")})/tools/mesh-lab/?$`).test(pathname)
+  );
+}
+
+function getBorderMode(pathname: string): BorderMode {
+  if (isHomePathname(pathname)) return "home";
+  if (isPlaceholderPathname(pathname)) return "hidden";
+  if (isNavSentinelPathname(pathname)) return "navSentinel";
+  return "always";
+}
+
 /**
- * 首页：大标题「Yu」顶端尚在顶栏下方可视区内时无底栏线；略一上滚过顶栏即淡入；其它路由始终显示。
- * 深/浅色行为一致，底边颜色随 `--border` 变化。
+ * 首页：大标题「Yu」顶端尚在顶栏下方可视区内时无底边线；略一上滚过顶栏即淡入。
+ * Blog / Mesh Lab：面包屑首行顶边同上。
+ * 占位页：始终无底边线。其余路由默认始终显示底边线。
  */
 export function SiteHeaderChrome({
   className,
@@ -39,32 +65,38 @@ function SiteHeaderChromeInner({
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const home = isHomePathname(pathname);
-  const [heroScrolledOut, setHeroScrolledOut] = useState(false);
+  const mode = getBorderMode(pathname);
+  const [sentinelScrolledOut, setSentinelScrolledOut] = useState(false);
 
-  const showBottomBorder = !home || heroScrolledOut;
+  const showBottomBorder =
+    mode === "hidden"
+      ? false
+      : mode === "always"
+        ? true
+        : sentinelScrolledOut;
 
   useEffect(() => {
-    if (!home) return;
+    if (mode === "hidden" || mode === "always") return;
 
-    const el = document.getElementById(HERO_TITLE_TOP_SENTINEL_ID);
+    const sentinelId =
+      mode === "home" ? HERO_TITLE_TOP_SENTINEL_ID : NAV_BORDER_SENTINEL_ID;
+    const el = document.getElementById(sentinelId);
     if (!el) return;
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        setHeroScrolledOut(!entry.isIntersecting);
+        setSentinelScrolledOut(!entry.isIntersecting);
       },
       {
         root: null,
         threshold: 0,
-        // Edge 仅支持 px / %，不可用 rem（会抛 SyntaxError）
         rootMargin: "-56px 0px 0px 0px",
       },
     );
 
     io.observe(el);
     return () => io.disconnect();
-  }, [home]);
+  }, [mode, pathname]);
 
   return (
     <header

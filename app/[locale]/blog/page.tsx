@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getAllBlogPostsSorted } from "@/lib/blog";
@@ -48,7 +49,8 @@ export default async function BlogIndexPage({ params }: PageProps) {
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-10 md:px-12 md:py-24">
       <div className="max-w-3xl text-left">
-        <p className="font-sans text-sm text-muted-foreground">
+        <p className="relative font-sans text-sm text-muted-foreground">
+          <NavBorderSentinel />
           <Link href="/" className="transition-colors hover:text-foreground">
             {t("breadcrumbHome")}
           </Link>

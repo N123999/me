@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { HomeBlog } from "@/components/home-blog";
 import { HomeCards } from "@/components/home-cards";
+import { HERO_TITLE_TOP_SENTINEL_ID } from "@/lib/site-header-sentinel";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default async function HomePage({
           <div className="relative">
             {/* 顶栏边框触发：与大标题「Yu」顶边对齐，略一上滚即与整块 Hero 脱钩 */}
             <span
-              id="hero-title-top-sentinel"
+              id={HERO_TITLE_TOP_SENTINEL_ID}
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-0 h-px"
             />
