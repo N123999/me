@@ -61,7 +61,8 @@ function LabNumberInput({
   return (
     <div
       className={cn(
-        "flex h-9 w-full overflow-hidden rounded-md border border-input bg-background text-sm shadow-xs",
+        "flex h-9 w-full rounded-md border border-input bg-background text-sm shadow-xs transition-colors transition-shadow",
+        "has-[:focus-visible]:border-foreground/35 has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-ring/35",
         className,
       )}
     >
@@ -75,19 +76,19 @@ function LabNumberInput({
           onChange(clamp(v));
         }}
         className={cn(
-          "min-w-0 flex-1 border-0 bg-transparent px-2 py-1.5 font-mono text-sm outline-none",
+          "min-w-0 flex-1 rounded-l-md border-0 bg-transparent px-2 py-1.5 font-mono text-sm outline-none",
           "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
         )}
       />
       <div
-        className="flex shrink-0 flex-col divide-y divide-border border-l border-border bg-muted/30"
+        className="flex shrink-0 flex-col divide-y divide-border overflow-hidden rounded-r-md border-l border-border bg-muted/30"
         role="group"
         aria-label={t("numberStepperGroup")}
       >
         <button
           type="button"
           onClick={inc}
-          className="flex flex-1 items-center justify-center px-1.5 text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground active:bg-muted"
+          className="flex flex-1 items-center justify-center px-1.5 text-muted-foreground outline-none transition-colors hover:bg-muted/80 hover:text-foreground active:bg-muted"
           aria-label={t("increment")}
         >
           <ChevronUp className="size-3.5" strokeWidth={2.25} />
@@ -95,7 +96,7 @@ function LabNumberInput({
         <button
           type="button"
           onClick={dec}
-          className="flex flex-1 items-center justify-center px-1.5 text-muted-foreground transition-colors hover:bg-muted/80 hover:text-foreground active:bg-muted"
+          className="flex flex-1 items-center justify-center px-1.5 text-muted-foreground outline-none transition-colors hover:bg-muted/80 hover:text-foreground active:bg-muted"
           aria-label={t("decrement")}
         >
           <ChevronDown className="size-3.5" strokeWidth={2.25} />
@@ -227,7 +228,9 @@ export function MeshLabClient() {
                   value={c.length === 7 ? c : "#000000"}
                   onChange={(e) => updateColor(i, e.target.value)}
                   className={cn(
-                    "h-9 w-12 shrink-0 cursor-pointer overflow-hidden rounded-md border border-border bg-transparent p-0",
+                    "h-9 w-12 shrink-0 cursor-pointer overflow-hidden rounded-md border border-border bg-transparent p-0 outline-none",
+                    "transition-colors transition-shadow",
+                    "focus-visible:ring-1 focus-visible:ring-ring/35 focus-visible:ring-offset-1 focus-visible:ring-offset-background",
                     "[appearance:none] [&::-webkit-color-swatch-wrapper]:border-0 [&::-webkit-color-swatch-wrapper]:p-0",
                     "[&::-webkit-color-swatch]:rounded-sm [&::-webkit-color-swatch]:border-0",
                     "[&::-moz-color-swatch]:rounded-sm [&::-moz-color-swatch]:border-0",
@@ -237,7 +240,7 @@ export function MeshLabClient() {
                   type="text"
                   value={c}
                   onChange={(e) => updateColor(i, e.target.value)}
-                  className="min-w-0 flex-1 rounded-md border border-input bg-background px-2 py-1.5 font-mono text-xs shadow-xs"
+                  className="min-w-0 flex-1 rounded-md border border-input bg-background px-2 py-1.5 font-mono text-xs shadow-xs outline-none transition-colors transition-shadow focus-visible:border-foreground/35 focus-visible:ring-1 focus-visible:ring-ring/35"
                   spellCheck={false}
                 />
               </label>
