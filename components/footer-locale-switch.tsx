@@ -11,7 +11,7 @@ const LOCALES: { code: AppLocale; label: string }[] = [
 ];
 
 /**
- * 底栏语言切换：写入 next-intl 路由（默认 en-US 无前缀）。
+ * 底栏语言切换：写入 next-intl 路由（localePrefix: always，兼容 OpenNext）。
  */
 export function FooterLocaleSwitch() {
   const locale = useLocale();
