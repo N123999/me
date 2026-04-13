@@ -61,8 +61,7 @@ function LabNumberInput({
   return (
     <div
       className={cn(
-        "flex h-9 w-full overflow-hidden rounded-md border border-input bg-background text-sm shadow-xs transition-colors",
-        "focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50",
+        "flex h-9 w-full overflow-hidden rounded-md border border-input bg-background text-sm shadow-xs",
         className,
       )}
     >
@@ -238,10 +237,7 @@ export function MeshLabClient() {
                   type="text"
                   value={c}
                   onChange={(e) => updateColor(i, e.target.value)}
-                  className={cn(
-                    "min-w-0 flex-1 rounded-md border border-input bg-background px-2 py-1.5 font-mono text-xs shadow-xs",
-                    "transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none",
-                  )}
+                  className="min-w-0 flex-1 rounded-md border border-input bg-background px-2 py-1.5 font-mono text-xs shadow-xs"
                   spellCheck={false}
                 />
               </label>
