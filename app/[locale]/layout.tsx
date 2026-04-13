@@ -13,6 +13,7 @@ import { ThemeSync } from "@/components/theme-sync";
 import { SiteHeader } from "@/components/site-header";
 import { routing } from "@/i18n/routing";
 import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
+import { THEME_BOOTSTRAP_INLINE_SCRIPT } from "@/lib/theme";
 import "../globals.css";
 
 const inter = Inter({
@@ -83,6 +84,12 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* 必须同步在 head 最前执行；next/script beforeInteractive 过晚会闪主题。suppressHydrationWarning：扩展可能改 script，避免 hydration 噪音 */}
+        <script
+          id="theme-bootstrap"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_INLINE_SCRIPT }}
+        />
         {locale === "zh-CN" ? (
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap"

@@ -1,6 +1,7 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { SiteHeaderChrome } from "@/components/site-header-chrome";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -11,7 +12,7 @@ export async function SiteHeader({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "nav" });
 
   return (
-    <header className="sticky top-0 z-50 shrink-0 border-b border-border bg-background pt-[env(safe-area-inset-top)]">
+    <SiteHeaderChrome>
       <nav
         className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-2.5 sm:px-10 sm:py-3 md:px-12"
         aria-label={t("mainAria")}
@@ -38,6 +39,6 @@ export async function SiteHeader({ locale }: { locale: string }) {
           </Link>
         </div>
       </nav>
-    </header>
+    </SiteHeaderChrome>
   );
 }
