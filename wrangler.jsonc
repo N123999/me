@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "v0",
+  // 须与 Cloudflare 上该 Worker 的名称一致（CI 里项目名常为仓库名，如 me）。
+  "name": "me",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-04-01",
   "compatibility_flags": [
@@ -25,7 +26,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "v0"
+      "service": "me"
     }
   ]
 }
