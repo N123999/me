@@ -40,5 +40,26 @@
   },
   "post": {
     "metadataFallbackTitle": "文章"
+  },
+  "meshLab": {
+    "pathLabel": "/tools/mesh-lab",
+    "title": "Mesh Gradient Lab",
+    "copyIntroBefore": "复制到 ",
+    "copyIntroAfter": " 覆盖同名 variant。",
+    "previewCaption": "预览",
+    "quickLoad": "快速载入",
+    "colorsHeading": "Hex",
+    "seed": "seed",
+    "frequency": "frequency",
+    "freqX": "x",
+    "freqY": "y",
+    "freqDelta": "delta",
+    "copySnippet": "复制当前 variant 片段",
+    "copied": "已复制",
+    "pasteHintBefore": "粘贴到 ",
+    "pasteHintAfter": " 里替换对应一项即可。",
+    "numberStepperGroup": "数值微调",
+    "increment": "增加",
+    "decrement": "减少"
   }
 }

@@ -1,31 +1,18 @@
 "use client";
 
 import { MeshGradient } from "@mesh-gradient/react";
+import { useMemo } from "react";
 import type { BlogCoverVariant } from "@/lib/blog";
+import {
+  MESH_COVER_PRESETS,
+  normalizeMeshFrequency,
+} from "@/lib/mesh-cover-presets";
 import { cn } from "@/lib/utils";
 
 /**
- * Blog 顶区：Figma 系 mesh 的近亲，用 WebGL 绘制（@mesh-gradient/react）。
- * 配色与 seed 可按需在 PRESETS 里调，接近里程碑区蓝/紫弥散。
+ * Blog 顶区 mesh：配色见 `lib/mesh-cover-presets.ts`，可在开发环境 `/tools/mesh-lab` 微调。
+ * 使用库默认 appearance（smooth 淡入）；`transition: false` 仅用于 Mesh Lab 调参页。
  */
-const PRESETS: Record<
-  BlogCoverVariant,
-  { colors: [string, string, string, string]; seed: number }
-> = {
-  violet: {
-    colors: ["#d8b4fe", "#a78bfa", "#7dd3fc", "#f9a8d4"],
-    seed: 11,
-  },
-  blue: {
-    colors: ["#e0f2fe", "#7dd3fc", "#38bdf8", "#bae6fd"],
-    seed: 24,
-  },
-  slate: {
-    colors: ["#f4f4f5", "#a1a1aa", "#93c5fd", "#d4d4d8"],
-    seed: 38,
-  },
-};
-
 export function MeshDiffuseCover({
   variant,
   className,
@@ -33,7 +20,17 @@ export function MeshDiffuseCover({
   variant: BlogCoverVariant;
   className?: string;
 }) {
-  const preset = PRESETS[variant];
+  const preset = MESH_COVER_PRESETS[variant];
+
+  const meshOptions = useMemo(
+    () => ({
+      colors: preset.colors,
+      seed: preset.seed,
+      frequency: normalizeMeshFrequency(preset.frequency),
+      isStatic: true,
+    }),
+    [preset],
+  );
 
   return (
     <div
@@ -42,11 +39,7 @@ export function MeshDiffuseCover({
     >
       <MeshGradient
         className="pointer-events-none absolute inset-0 h-full w-full"
-        options={{
-          colors: preset.colors,
-          seed: preset.seed,
-          isStatic: true,
-        }}
+        options={meshOptions}
       />
     </div>
   );

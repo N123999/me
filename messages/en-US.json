@@ -40,5 +40,26 @@
   },
   "post": {
     "metadataFallbackTitle": "Post"
+  },
+  "meshLab": {
+    "pathLabel": "/tools/mesh-lab",
+    "title": "Mesh Gradient Lab",
+    "copyIntroBefore": "Copy into ",
+    "copyIntroAfter": " to replace the variant with the same name.",
+    "previewCaption": "Preview",
+    "quickLoad": "Quick load",
+    "colorsHeading": "Hex",
+    "seed": "seed",
+    "frequency": "frequency",
+    "freqX": "x",
+    "freqY": "y",
+    "freqDelta": "delta",
+    "copySnippet": "Copy current variant snippet",
+    "copied": "Copied",
+    "pasteHintBefore": "Paste into ",
+    "pasteHintAfter": " to replace the matching entry.",
+    "numberStepperGroup": "Fine-tune value",
+    "increment": "Increase",
+    "decrement": "Decrease"
   }
 }

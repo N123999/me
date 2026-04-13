@@ -10,7 +10,8 @@
   --color-foreground: var(--foreground);
   /* 英文模式：全文 Inter。中文模式在下方 html[data-locale="zh-CN"] 中追加 Noto 作 CJK 回退 */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code",
+    "Segoe UI Mono", monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -96,6 +97,8 @@ html:not([data-theme="light"]) {
 }
 
 html[data-theme="light"] {
+  /* 与深色一致；否则 --radius 未定义时 rounded-md 等会失效成直角 */
+  --radius: 0.625rem;
   --background: #ffffff;
   --foreground: oklch(0.22 0 0);
   --card: #ffffff;
@@ -150,5 +153,50 @@ html[data-theme="light"] {
 
   html[data-theme="light"] .prose-site {
     @apply prose prose-neutral mt-10 max-w-none text-left font-sans prose-headings:text-left prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-left prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-black/[0.07] prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-black/[0.04] prose-li:text-left;
+  }
+
+  /* Mesh Lab 代码块横向滚动条：与暗色画布协调，替代系统白底/箭头样式 */
+  .mesh-lab-snippet-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.4 0 0) oklch(0.14 0 0);
+  }
+
+  .mesh-lab-snippet-scroll::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  .mesh-lab-snippet-scroll::-webkit-scrollbar-track {
+    background: oklch(0.12 0 0);
+    border-radius: 3px;
+  }
+
+  .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb {
+    background: oklch(0.38 0 0);
+    border-radius: 3px;
+  }
+
+  .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.48 0 0);
+  }
+
+  .mesh-lab-snippet-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  html[data-theme="light"] .mesh-lab-snippet-scroll {
+    scrollbar-color: oklch(0.65 0 0) oklch(0.94 0 0);
+  }
+
+  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-track {
+    background: oklch(0.94 0 0);
+  }
+
+  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb {
+    background: oklch(0.68 0 0);
+  }
+
+  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.52 0 0);
   }
 }
