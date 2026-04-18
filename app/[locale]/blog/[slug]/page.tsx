@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import { BlogThemedImage, BlogThemedVideo } from "@/components/blog-themed-media";
 import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -81,7 +82,10 @@ export default async function BlogPostPage({ params }: Props) {
             {t("minRead", { minutes: post.readingMinutes })}
           </p>
           <div className="prose-site">
-            <MDXRemote source={body} />
+            <MDXRemote
+              source={body}
+              components={{ BlogThemedImage, BlogThemedVideo }}
+            />
           </div>
         </article>
       </div>
