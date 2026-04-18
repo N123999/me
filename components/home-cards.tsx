@@ -71,7 +71,7 @@ export async function HomeCards({ locale }: { locale: string }) {
             <p
               className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 text-center font-sans text-xl font-normal tracking-tight text-white md:text-2xl [text-shadow:0_0_20px_rgba(0,0,0,0.45),0_0_48px_rgba(0,0,0,0.32),0_0_88px_rgba(0,0,0,0.18)]"
             >
-              IDK?
+              None.
             </p>
           </div>
 
