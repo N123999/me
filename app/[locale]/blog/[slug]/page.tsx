@@ -1,31 +1,45 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { BlogThemedImage, BlogThemedVideo } from "@/components/blog-themed-media";
 import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { getBlogPostBySlug, getPost, getPostSlugs } from "@/lib/blog";
+import {
+  getBlogPostBySlug,
+  getBlogStaticParamEntries,
+  getPost,
+  resolveBlogPostLocale,
+} from "@/lib/blog";
 import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
+/** 仅预渲染磁盘上存在的 `(locale, slug)`，与 `[locale]/layout` 的 locale 列表配合 */
 export function generateStaticParams() {
-  return getPostSlugs().map((slug) => ({ slug }));
+  return getBlogStaticParamEntries();
 }
 
-/** 未在构建期列出的 slug 直接 404，避免生成 Node fallback（Cloudflare next-on-pages）。 */
-export const dynamicParams = false;
+/** 允许仅某一语有稿（如仅有 zh-CN/design）；未预生成路径按需或 404 */
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const post = getBlogPostBySlug(slug);
   const tPost = await getTranslations({ locale, namespace: "post" });
   const base = getSiteBaseUrl();
   const path = `/blog/${slug}`;
 
+  const targetLocale = resolveBlogPostLocale(slug, locale);
+  if (!targetLocale) {
+    return { title: tPost("metadataFallbackTitle") };
+  }
+  if (targetLocale !== locale) {
+    redirect(localeHref(targetLocale, path));
+  }
+
+  const post = getBlogPostBySlug(slug, locale);
   if (!post) {
     return { title: tPost("metadataFallbackTitle") };
   }
@@ -48,7 +62,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const payload = getPost(slug);
+  const targetLocale = resolveBlogPostLocale(slug, locale);
+  if (!targetLocale) notFound();
+  if (targetLocale !== locale) {
+    redirect(localeHref(targetLocale, `/blog/${slug}`));
+  }
+  const payload = getPost(slug, locale);
   if (!payload) notFound();
   const { meta: post, body } = payload;
   const t = await getTranslations({ locale, namespace: "blog" });

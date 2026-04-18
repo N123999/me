@@ -1,0 +1,49 @@
+---
+title: "How I Think About Design"
+excerpt: "Design."
+publishedAt: "2026-04-19T05:30:00.000Z"
+readingMinutes: 3
+cover: holographic
+---
+
+Straight to the point,
+
+I’ve been working on XianYu Launcher, a WinUI 3 app that uses Fluent Design.
+
+
+<BlogThemedVideo
+  srcDark="https://cdn.xianyu.dev/2026/04/19/Launcher-Site-Dark.mp4"
+  srcLight="https://cdn.xianyu.dev/2026/04/19/Launcher-Site-Light.mp4"
+/>
+
+This is the site I’ve been refining for months. Recently someone looked at it and said it wasn’t “Fluent enough,” that it felt “too tight,” and that Fluent Design means 8px corner radius and narrow spacing. I don’t think that’s right.
+
+I want to share how I think about design.
+
+First, Fluent Design has, since 1.0, been split across Web, Android, iOS, Windows, and other platform contexts. Each one shifts the design somewhat, including on the web.
+
+Many design systems also split their guides by platform: one set of controls, but not every usage lines up everywhere. For example, Apple Music on Windows uses WinUI 3 for the UI. It doesn’t look identical to other platforms, yet it still feels native and comfortable.
+
+On the web, the way I approach it is: more spacing than a typical desktop utility, more whitespace, better readability. When there’s no art to lean on, use cards and larger corner radii. Plenty of well-known pages follow that kind of pattern.
+
+Finally, on Fluent: at least Microsoft’s own Fluent 2 site isn’t narrow spacing and tiny corners either—the buttons are even pill-shaped. Below is a hero screenshot you can compare.
+
+<BlogThemedImage
+  srcDark="https://cdn.xianyu.dev/2026/04/19/Fluent-2-Hero-Dark.png"
+  srcLight="https://cdn.xianyu.dev/2026/04/19/Fluent-2-Hero-Light.png"
+  alt="Fluent 2 Site Hero"
+  width={1200}
+  style={{ maxWidth: '100%', height: 'auto', borderRadius: '12px' }}
+/>
+
+In the end, looking good is the outcome, not the name of a style. Don’t use how a system reads in one context to dictate how it should read in another.
+
+If you think the XianYu Launcher site could be improved, Welcome PR.
+
+---
+
+## 参考
+
+- [XianYu Launcher](https://xianyulauncher.com/)
+- [Apple Music - Microsoft Store](https://apps.microsoft.com/detail/9PFHDD62MXS1)
+- [Fluent 2 — Microsoft Design](https://fluent2.microsoft.design/)

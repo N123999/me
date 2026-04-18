@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { MeshDiffuseCover } from "@/components/mesh-diffuse-cover";
-import { getLatestBlogPosts } from "@/lib/blog";
+import { getLatestBlogPostsWithFallback } from "@/lib/blog";
 
 function formatBlogDate(iso: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, {
@@ -17,7 +17,7 @@ function formatBlogDate(iso: string, locale: string): string {
  * `locale` 由 `[locale]/page` 传入，避免 `getLocale()` 把整个页打成 dynamic（Cloudflare next-on-pages 依赖静态/SSG）。
  */
 export async function HomeBlog({ locale }: { locale: string }) {
-  const posts = getLatestBlogPosts(3);
+  const posts = getLatestBlogPostsWithFallback(3, locale);
   const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
@@ -47,6 +47,11 @@ export async function HomeBlog({ locale }: { locale: string }) {
             <li key={post.slug} className="min-w-0">
               <Link
                 href={`/blog/${post.slug}`}
+                locale={
+                  post.contentLocale !== locale
+                    ? post.contentLocale
+                    : undefined
+                }
                 className="block min-w-0 outline-none transition-opacity hover:opacity-95 focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <article className="flex flex-col">

@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { getAllBlogPostsSorted } from "@/lib/blog";
+import { getAllBlogPostsSortedWithFallback } from "@/lib/blog";
 import { getSiteBaseUrl, localeHref } from "@/lib/site-url";
 
 type PageProps = { params: Promise<{ locale: string }> };
@@ -43,7 +43,7 @@ function formatDate(iso: string, locale: string): string {
 export default async function BlogIndexPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const posts = getAllBlogPostsSorted();
+  const posts = getAllBlogPostsSortedWithFallback(locale);
   const t = await getTranslations({ locale, namespace: "blog" });
 
   return (
@@ -79,6 +79,11 @@ export default async function BlogIndexPage({ params }: PageProps) {
                 <h2 className="mt-2 font-sans text-xl font-semibold tracking-tight text-foreground">
                   <Link
                     href={`/blog/${post.slug}`}
+                    locale={
+                      post.contentLocale !== locale
+                        ? post.contentLocale
+                        : undefined
+                    }
                     className="outline-none transition-colors hover:text-muted-foreground focus-visible:rounded-[4px] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {post.title}
