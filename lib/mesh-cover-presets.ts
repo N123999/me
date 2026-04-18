@@ -17,11 +17,11 @@ export function normalizeHexColor(hex: string): string {
   return c.slice(0, 7).toLowerCase();
 }
 
-/** Blog 封面三套预设；与 Mesh 实验室共用，改完在此文件或实验室里复制回即可 */
+/** Blog 封面预设；与 Mesh 实验室共用，改完在此文件或实验室里复制回即可 */
 export const MESH_COVER_PRESETS: Record<BlogCoverVariant, MeshCoverPreset> = {
   violet: {
-    colors: ["#8a519a","#7948ea","#6b03b0","#330896"],
-    seed: 21,
+    colors: ["#4158d6","#6a51e8","#64a9f8","#0423be"],
+    seed: 27,
     frequency: { x: 0.0002, y: 0.00026, delta: 0.00012 },
   },
   blue: {
@@ -30,9 +30,14 @@ export const MESH_COVER_PRESETS: Record<BlogCoverVariant, MeshCoverPreset> = {
     frequency: { x: 0.0002, y: 0.00026, delta: 0.000141 },
   },
   slate: {
-    colors: ["#e2e8f0", "#64748b", "#1e293b", "#020617"],
-    seed: 305,
+    colors: ["#e2e8f0","#64748b","#1e293b","#020617"],
+    seed: 302,
     frequency: { x: 0.00016, y: 0.00022, delta: 0.0001 },
+  },
+  holographic: {
+    colors: ["#ff006e","#fb5607","#ffbe0b","#8338ec"],
+    seed: 6,
+    frequency: { x: 0.0002, y: 0.00026, delta: 0.00012 },
   },
 };
 

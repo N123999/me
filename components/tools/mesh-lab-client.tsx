@@ -16,7 +16,7 @@ import { NavBorderSentinel } from "@/components/nav-border-sentinel";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const VARIANTS: BlogCoverVariant[] = ["violet", "blue", "slate"];
+const VARIANTS = Object.keys(MESH_COVER_PRESETS) as BlogCoverVariant[];
 
 const FREQ_LABEL_KEY = { x: "freqX", y: "freqY", delta: "freqDelta" } as const;
 

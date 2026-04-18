@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 
-export type BlogCoverVariant = "violet" | "blue" | "slate";
+export type BlogCoverVariant = "violet" | "blue" | "slate" | "holographic";
 
 export type BlogPost = {
   slug: string;
@@ -58,7 +58,7 @@ function resolvePostBasename(fromParam: string): string | undefined {
 }
 
 function isCover(v: unknown): v is BlogCoverVariant {
-  return v === "violet" || v === "blue" || v === "slate";
+  return v === "violet" || v === "blue" || v === "slate" || v === "holographic";
 }
 
 function buildMeta(
