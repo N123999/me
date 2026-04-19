@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { FooterLocaleSwitch } from "@/components/footer-locale-switch";
 import { FooterThemeSwitch } from "@/components/footer-theme-switch";
 import { Link } from "@/i18n/navigation";
+import { XIANYU_LAUNCHER_HREF } from "@/lib/site-url";
 
 /** lucide-react 1.x 无 Github 图标导出 */
 function GitHubMark(props: SVGProps<SVGSVGElement>) {
@@ -31,7 +32,7 @@ const columnDefs: FooterColumnDef[] = [
     titleKey: "product",
     items: [
       { label: "Spirit Studio", href: "/product" },
-      { label: "Launcher", href: "/launcher" },
+      { label: "Launcher", href: XIANYU_LAUNCHER_HREF, external: true },
     ],
   },
   {

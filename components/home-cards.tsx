@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { XIANYU_LAUNCHER_HREF } from "@/lib/site-url";
 
 /** 设计稿「4」= 4px 圆角（不是 Tailwind 的 `rounded-4xl` 尺寸）。 */
 const cardRadius = "rounded-[4px]";
@@ -41,8 +42,10 @@ export async function HomeCards({ locale }: { locale: string }) {
           </Link>
 
           {/* 行1 右：宽 */}
-          <Link
-            href="/launcher"
+          <a
+            href={XIANYU_LAUNCHER_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="XianYu Launcher"
             className={`${cardBase} block ${rowCellMin} md:col-span-4`}
           >
@@ -56,7 +59,7 @@ export async function HomeCards({ locale }: { locale: string }) {
                 className="object-cover object-center"
               />
             </div>
-          </Link>
+          </a>
 
           {/* 行2 左：宽 · IDK（底图 + 叠字，样式同 Coming soon） */}
           <div className={`${cardBase} relative ${rowCellMin} md:col-span-4`}>

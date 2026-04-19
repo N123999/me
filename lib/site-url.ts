@@ -6,6 +6,9 @@ export function getSiteBaseUrl(): URL {
   return new URL(raw.endsWith("/") ? raw : `${raw}/`);
 }
 
+/** XianYu Launcher 官网（站内导航统一外链、新标签页打开）。 */
+export const XIANYU_LAUNCHER_HREF = "https://xianyulauncher.com/";
+
 /** 与 `localePrefix: "always"` 一致（含默认 en-US）。 */
 export function localeHref(locale: string, pathname: string): string {
   const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
