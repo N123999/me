@@ -1,3 +1,12 @@
+![Me Readme Hero](https://github.com/user-attachments/assets/0ad36b7d-0a58-4e51-8600-7e2710391fe1)
+
+<div align="center">
+
+# Me
+
+My personal site.
+</div>
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
