@@ -1,4 +1,4 @@
-![Me Readme Hero](https://github.com/user-attachments/assets/0ad36b7d-0a58-4e51-8600-7e2710391fe1)
+![Me Readme Hero](https://github.com/user-attachments/assets/237e124c-2288-414a-a622-eaffe5e1fd5a)
 
 <div align="center">
 
