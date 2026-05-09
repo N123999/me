@@ -52,7 +52,8 @@
     "columns": {
       "product": "Product",
       "writing": "Writing",
-      "site": "Site"
+      "site": "Site",
+      "versions": "Versions"
     },
     "linkHome": "Home",
     "copyrightLine": "© {year} Yu. Productivity, tools, design."

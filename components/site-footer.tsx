@@ -23,7 +23,7 @@ type FooterItem = {
 
 type FooterColumnDef = {
   id: string;
-  titleKey: "product" | "writing" | "site";
+  titleKey: "product" | "writing" | "site" | "versions";
   items: FooterItem[];
 };
 
@@ -45,6 +45,11 @@ const columnDefs: FooterColumnDef[] = [
     id: "site",
     titleKey: "site",
     items: [{ label: "__HOME__", href: "/" }],
+  },
+  {
+    id: "versions",
+    titleKey: "versions",
+    items: [{ label: "v0", href: "https://v0.xianyu.dev", external: true }],
   },
 ];
 

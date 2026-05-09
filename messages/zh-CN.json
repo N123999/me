@@ -52,7 +52,8 @@
     "columns": {
       "product": "产品",
       "writing": "写作",
-      "site": "站点"
+      "site": "站点",
+      "versions": "版本"
     },
     "linkHome": "首页",
     "copyrightLine": "© {year} Yu. Productivity, tools, design."
