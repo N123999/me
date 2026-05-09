@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   // 须与 Cloudflare 上该 Worker 的名称一致（CI 里项目名常为仓库名，如 me）。
-  "name": "me",
+  "name": "xianyu-v1",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-04-01",
   "compatibility_flags": [
@@ -9,8 +9,14 @@
     "global_fetch_strictly_public"
   ],
   "vars": {
-    "NEXT_INC_CACHE_R2_PREFIX": "incremental-cache"
+    "NEXT_INC_CACHE_R2_PREFIX": "versions/v1/incremental-cache"
   },
+  "routes": [
+    {
+      "pattern": "v1.xianyu.dev",
+      "custom_domain": true
+    }
+  ],
   "r2_buckets": [
     {
       "binding": "NEXT_INC_CACHE_R2_BUCKET",
@@ -26,7 +32,7 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "me"
+      "service": "xianyu-v1"
     }
   ]
 }
