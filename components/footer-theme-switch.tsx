@@ -16,8 +16,21 @@ function readThemeFromDom(): SiteTheme {
   return "dark";
 }
 
+const THEME_SWITCHING_CLASS = "theme-switching";
+
 function applyTheme(theme: SiteTheme) {
-  document.documentElement.setAttribute("data-theme", theme);
+  const root = document.documentElement;
+  // TODO: Theme preset swaps in the hero shader can briefly stall the main thread.
+  // Keep a short-lived switching class on <html> so CSS chrome can snap to the new theme without showing a frozen in-between frame.
+  root.classList.add(THEME_SWITCHING_CLASS);
+  root.setAttribute("data-theme", theme);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      root.classList.remove(THEME_SWITCHING_CLASS);
+    });
+  });
+
   try {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
     document.cookie = themeCookieString(theme);

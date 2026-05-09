@@ -65,6 +65,7 @@ html:not([data-theme="light"]) {
   --background: oklch(0 0 0);
   --foreground: oklch(0.985 0 0);
   --hero-secondary: oklch(0.84 0 0);
+  --header-line: oklch(1 0 0 / 12%);
   --frame-line: rgb(31 31 31);
   --frame-soft: rgb(255 255 255 / 0.07);
   --frame-panel: rgb(255 255 255 / 0.02);
@@ -103,10 +104,11 @@ html:not([data-theme="light"]) {
 html[data-theme="light"] {
   /* 与深色一致；否则 --radius 未定义时 rounded-md 等会失效成直角 */
   --radius: 0.625rem;
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: oklch(0.22 0 0);
   --hero-secondary: oklch(0.4 0 0);
-  --frame-line: rgb(31 31 31 / 0.16);
+  --header-line: #ebebeb;
+  --frame-line: #ebebeb;
   --frame-soft: rgb(31 31 31 / 0.08);
   --frame-panel: rgb(31 31 31 / 0.025);
   --card: #ffffff;
@@ -144,9 +146,18 @@ html[data-theme="light"] {
   * {
     @apply border-border outline-ring/50;
   }
+
+  /* TODO: Theme switching temporarily disables transitions so header chrome and buttons do not linger in stale colors while the hero shader reinitializes. */
+  html.theme-switching *,
+  html.theme-switching *::before,
+  html.theme-switching *::after {
+    transition: none !important;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
@@ -174,7 +185,7 @@ html[data-theme="light"] {
   }
 
   html[data-theme="light"] .home-hero-stage {
-    background-color: #ffffff;
+    background-color: #fafafa;
   }
 
   .project-spirit-studio-wordmark {

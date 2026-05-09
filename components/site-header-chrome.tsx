@@ -99,7 +99,9 @@ function SiteHeaderChromeInner({
     <header
       className={cn(
         "site-header sticky top-0 z-50 shrink-0 border-b bg-background px-5 pt-[env(safe-area-inset-top)] transition-[border-color] duration-300 ease-out sm:px-10 md:px-12",
-        showBottomBorder ? "border-border" : "border-transparent",
+        showBottomBorder
+          ? "border-[color:var(--header-line,var(--border))]"
+          : "border-transparent",
         className,
       )}
     >

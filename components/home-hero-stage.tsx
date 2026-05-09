@@ -1,7 +1,14 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import {
+  startTransition,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
+
+type HeroTheme = "light" | "dark";
 
 function subscribeTheme(onStoreChange: () => void) {
   const el = document.documentElement;
@@ -21,12 +28,26 @@ function getServerThemeSnapshot() {
 }
 
 export function HomeHeroStage() {
-  const theme = useSyncExternalStore(
+  const theme = useSyncExternalStore<HeroTheme>(
     subscribeTheme,
     getThemeSnapshot,
     getServerThemeSnapshot,
   );
-  const isLight = theme === "light";
+  const [renderTheme, setRenderTheme] = useState<HeroTheme>(theme);
+
+  useEffect(() => {
+    if (renderTheme === theme) return;
+
+    const frame = requestAnimationFrame(() => {
+      startTransition(() => {
+        setRenderTheme(theme);
+      });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [renderTheme, theme]);
+
+  const isLight = renderTheme === "light";
 
   return (
     <div aria-hidden className="home-hero-stage absolute inset-0 overflow-hidden">
