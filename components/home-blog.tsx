@@ -20,7 +20,7 @@ export async function HomeBlog({ locale }: { locale: string }) {
       className="-mt-px bg-background px-5 pb-0 pt-0 sm:px-10 md:px-12"
       aria-labelledby="home-blog-heading"
     >
-      <div className="mx-auto max-w-6xl border border-[color:var(--frame-line)] bg-background/92">
+      <div className="mx-auto max-w-[68rem] border border-[color:var(--frame-line)] bg-background/92">
         <div className="border-b border-[color:var(--frame-line)] px-5 py-5 sm:px-6 md:px-8">
           <h2
             id="home-blog-heading"

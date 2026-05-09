@@ -3,12 +3,19 @@
 import { usePathname } from "next/navigation";
 import { HomeHeroStage } from "@/components/home-hero-stage";
 import { routing } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 
 function isHomePathname(pathname: string): boolean {
   return new RegExp(`^/(${routing.locales.join("|")})/?$`).test(pathname);
 }
 
-export function SiteFooterClosing({ label }: { label: string }) {
+export function SiteFooterClosing({
+  className,
+  label,
+}: {
+  className?: string;
+  label: string;
+}) {
   const pathname = usePathname();
 
   if (!isHomePathname(pathname)) {
@@ -16,7 +23,12 @@ export function SiteFooterClosing({ label }: { label: string }) {
   }
 
   return (
-    <div className="relative overflow-hidden border-x border-b border-[color:var(--frame-line)] px-5 py-12 text-center sm:px-6 sm:py-14 md:px-8 md:py-16">
+    <div
+      className={cn(
+        "relative overflow-hidden border-x border-b border-[color:var(--frame-line)] px-5 py-12 text-center sm:px-6 sm:py-14 md:px-8 md:py-16",
+        className,
+      )}
+    >
       <div className="absolute -inset-x-24 -inset-y-20">
         <HomeHeroStage />
       </div>

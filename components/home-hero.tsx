@@ -35,11 +35,11 @@ export async function HomeHero({ locale }: HomeHeroProps) {
 
   return (
     <section
-      className="px-5 pb-0 pt-10 sm:px-10 sm:pt-14 md:px-12 md:pt-18"
+      className="px-5 pb-0 pt-5 sm:px-10 sm:pt-7 md:px-12 md:pt-9"
       aria-labelledby="home-hero-heading"
     >
-      <div className="mx-auto max-w-6xl pt-4 sm:pt-6 md:pt-8">
-        <div className="relative w-full max-w-[72rem] border border-[color:var(--frame-line)] bg-background/92">
+      <div className="mx-auto max-w-[68rem] pt-0">
+        <div className="relative w-full border border-[color:var(--frame-line)] bg-background/92">
           <span
             id={HERO_TITLE_TOP_SENTINEL_ID}
             aria-hidden

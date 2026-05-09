@@ -86,8 +86,10 @@ export async function SiteFooter({ locale }: { locale: string }) {
 
   return (
     <footer className="shrink-0 bg-background px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-0 sm:px-10 md:px-12">
-      <div className="mx-auto max-w-6xl">
-        <SiteFooterClosing label={t("closingWord")} />
+      <div className="mx-auto max-w-[68rem]">
+        <SiteFooterClosing
+          label={t("closingWord")}
+        />
 
         <nav
           className="grid grid-cols-2 gap-x-8 gap-y-12 pt-16 sm:grid-cols-3 sm:pt-20 lg:grid-cols-4"

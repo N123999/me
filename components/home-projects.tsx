@@ -283,7 +283,7 @@ export async function HomeProjects({ locale }: { locale: string }) {
 
   return (
     <section className="-mt-px bg-background px-5 pb-0 pt-0 sm:px-10 md:px-12">
-      <div className="mx-auto max-w-6xl border border-[color:var(--frame-line)] bg-background/92">
+      <div className="mx-auto max-w-[68rem] border border-[color:var(--frame-line)] bg-background/92">
         <div className="border-b border-[color:var(--frame-line)] px-5 py-5 text-center sm:px-6 md:px-8">
           <h2 className="text-xl font-medium tracking-tight text-foreground sm:text-2xl">
             Project
