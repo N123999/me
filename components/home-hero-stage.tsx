@@ -17,13 +17,13 @@ function subscribeTheme(onStoreChange: () => void) {
   return () => obs.disconnect();
 }
 
-function getThemeSnapshot() {
+function getThemeSnapshot(): HeroTheme {
   return document.documentElement.getAttribute("data-theme") === "light"
     ? "light"
     : "dark";
 }
 
-function getServerThemeSnapshot() {
+function getServerThemeSnapshot(): HeroTheme {
   return "dark";
 }
 
