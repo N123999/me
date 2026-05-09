@@ -12,23 +12,47 @@
   },
   "home": {
     "cardsSectionAria": "里程碑",
-    "closingSectionAria": "收尾"
+    "closingSectionAria": "收尾",
+    "heroFrameLabel": "Design surface",
+    "heroFrameMeta": "Index / 2026",
+    "heroEyebrow": "Yu",
+    "heroTitle": "Productivity, tools, design.",
+    "heroDescription": "Yu 的项目与写作。",
+    "heroPrimaryAction": "精选项目",
+    "heroSecondaryAction": "写作",
+    "heroStageLabel": "Motion field",
+    "heroStageMeta": "Calibrated / Live",
+    "focusLabel": "Focus",
+    "focusValue": "过程、审美、克制。",
+    "writingLabel": "Writing",
+    "writingValue": "随笔与长文思考。",
+    "scopeLabel": "Scope",
+    "scopeValue": "IDK.",
+    "projects": {
+      "projectCta": "前往",
+      "spiritStudioMeta": "Org?",
+      "spiritAgentMeta": "去中心化开源 AI 智能体",
+      "xianyuLauncherMeta": "Launcher",
+      "comingSoonMeta": "Next",
+      "soonPreview": "Soon."
+    }
   },
   "blog": {
     "breadcrumbHome": "首页",
     "pageHeading": "Blog",
     "pageIntro": "随笔与长文思考。",
+    "readCta": "阅读",
     "minRead": "约 {minutes} 分钟"
   },
   "footer": {
     "navAria": "页脚",
     "externalAria": "外部链接",
     "language": "语言",
+    "closingWord": "Bye",
     "columns": {
       "product": "产品",
       "writing": "写作",
-      "site": "站点",
-      "credits": "鸣谢"
+      "site": "站点"
     },
     "linkHome": "首页",
     "copyrightLine": "© {year} Yu. Productivity, tools, design."
@@ -40,26 +64,5 @@
   },
   "post": {
     "metadataFallbackTitle": "文章"
-  },
-  "meshLab": {
-    "pathLabel": "/tools/mesh-lab",
-    "title": "Mesh Gradient Lab",
-    "copyIntroBefore": "复制到 ",
-    "copyIntroAfter": " 覆盖同名 variant。",
-    "previewCaption": "预览",
-    "quickLoad": "快速载入",
-    "colorsHeading": "Hex",
-    "seed": "seed",
-    "frequency": "frequency",
-    "freqX": "x",
-    "freqY": "y",
-    "freqDelta": "delta",
-    "copySnippet": "复制当前 variant 片段",
-    "copied": "已复制",
-    "pasteHintBefore": "粘贴到 ",
-    "pasteHintAfter": " 里替换对应一项即可。",
-    "numberStepperGroup": "数值微调",
-    "increment": "增加",
-    "decrement": "减少"
   }
 }

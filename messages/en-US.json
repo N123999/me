@@ -12,23 +12,47 @@
   },
   "home": {
     "cardsSectionAria": "Milestones",
-    "closingSectionAria": "Closing"
+    "closingSectionAria": "Closing",
+    "heroFrameLabel": "Design surface",
+    "heroFrameMeta": "Index / 2026",
+    "heroEyebrow": "Yu",
+    "heroTitle": "Productivity, tools, design.",
+    "heroDescription": "Projects and writing by Yu.",
+    "heroPrimaryAction": "Selected work",
+    "heroSecondaryAction": "Writing",
+    "heroStageLabel": "Motion field",
+    "heroStageMeta": "Calibrated / Live",
+    "focusLabel": "Focus",
+    "focusValue": "Process, taste, restraint.",
+    "writingLabel": "Writing",
+    "writingValue": "Notes and longer-form thoughts.",
+    "scopeLabel": "Scope",
+    "scopeValue": "IDK.",
+    "projects": {
+      "projectCta": "Go",
+      "spiritStudioMeta": "Org?",
+      "spiritAgentMeta": "Decentralized open-source AI agent",
+      "xianyuLauncherMeta": "Launcher",
+      "comingSoonMeta": "Next",
+      "soonPreview": "Soon."
+    }
   },
   "blog": {
     "breadcrumbHome": "Home",
     "pageHeading": "Blog",
     "pageIntro": "Notes and longer-form thoughts.",
+    "readCta": "Read",
     "minRead": "{minutes} min read"
   },
   "footer": {
     "navAria": "Footer",
     "externalAria": "External links",
     "language": "Language",
+    "closingWord": "Bye",
     "columns": {
       "product": "Product",
       "writing": "Writing",
-      "site": "Site",
-      "credits": "Credits"
+      "site": "Site"
     },
     "linkHome": "Home",
     "copyrightLine": "© {year} Yu. Productivity, tools, design."
@@ -40,26 +64,5 @@
   },
   "post": {
     "metadataFallbackTitle": "Post"
-  },
-  "meshLab": {
-    "pathLabel": "/tools/mesh-lab",
-    "title": "Mesh Gradient Lab",
-    "copyIntroBefore": "Copy into ",
-    "copyIntroAfter": " to replace the variant with the same name.",
-    "previewCaption": "Preview",
-    "quickLoad": "Quick load",
-    "colorsHeading": "Hex",
-    "seed": "seed",
-    "frequency": "frequency",
-    "freqX": "x",
-    "freqY": "y",
-    "freqDelta": "delta",
-    "copySnippet": "Copy current variant snippet",
-    "copied": "Copied",
-    "pasteHintBefore": "Paste into ",
-    "pasteHintAfter": " to replace the matching entry.",
-    "numberStepperGroup": "Fine-tune value",
-    "increment": "Increase",
-    "decrement": "Decrease"
   }
 }

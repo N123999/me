@@ -14,7 +14,7 @@ export async function SiteHeader({ locale }: { locale: string }) {
   return (
     <SiteHeaderChrome>
       <nav
-        className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-2.5 sm:px-10 sm:py-3 md:px-12"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-6 py-2.5 sm:py-3"
         aria-label={t("mainAria")}
       >
         <Link

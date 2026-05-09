@@ -1,5 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import { getTranslations } from "next-intl/server";
+import { SiteFooterClosing } from "@/components/site-footer-closing";
 import { FooterLocaleSwitch } from "@/components/footer-locale-switch";
 import { FooterThemeSwitch } from "@/components/footer-theme-switch";
 import { Link } from "@/i18n/navigation";
@@ -22,7 +23,7 @@ type FooterItem = {
 
 type FooterColumnDef = {
   id: string;
-  titleKey: "product" | "writing" | "site" | "credits";
+  titleKey: "product" | "writing" | "site";
   items: FooterItem[];
 };
 
@@ -44,17 +45,6 @@ const columnDefs: FooterColumnDef[] = [
     id: "site",
     titleKey: "site",
     items: [{ label: "__HOME__", href: "/" }],
-  },
-  {
-    id: "credits",
-    titleKey: "credits",
-    items: [
-      {
-        label: "Mesh gradient",
-        href: "https://github.com/mikhailmogilnikov/mesh-gradient",
-        external: true,
-      },
-    ],
   },
 ];
 
@@ -90,10 +80,12 @@ export async function SiteFooter({ locale }: { locale: string }) {
   }));
 
   return (
-    <footer className="shrink-0 bg-background pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-16 sm:pt-20">
-      <div className="mx-auto max-w-6xl px-5 sm:px-10 md:px-12">
+    <footer className="shrink-0 bg-background px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-0 sm:px-10 md:px-12">
+      <div className="mx-auto max-w-6xl">
+        <SiteFooterClosing label={t("closingWord")} />
+
         <nav
-          className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4"
+          className="grid grid-cols-2 gap-x-8 gap-y-12 pt-16 sm:grid-cols-3 sm:pt-20 lg:grid-cols-4"
           aria-label={t("navAria")}
         >
           {columns.map((col) => (

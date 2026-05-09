@@ -5,15 +5,12 @@ import readingTime from "reading-time";
 
 import { routing, type AppLocale } from "@/i18n/routing";
 
-export type BlogCoverVariant = "violet" | "blue" | "slate" | "holographic";
-
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
   publishedAt: string;
   readingMinutes: number;
-  cover: BlogCoverVariant;
 };
 
 /** 列表/首页：展示 meta 来自 `contentLocale` 下的 MDX（可与当前页语言不同） */
@@ -80,10 +77,6 @@ function resolvePostBasename(
   return undefined;
 }
 
-function isCover(v: unknown): v is BlogCoverVariant {
-  return v === "violet" || v === "blue" || v === "slate" || v === "holographic";
-}
-
 function buildMeta(
   slug: string,
   data: Record<string, unknown>,
@@ -92,12 +85,10 @@ function buildMeta(
   const title = data.title;
   const excerpt = data.excerpt;
   const publishedAt = data.publishedAt;
-  const cover = data.cover;
 
   if (typeof title !== "string" || !title) return null;
   if (typeof excerpt !== "string" || !excerpt) return null;
   if (typeof publishedAt !== "string" || !publishedAt) return null;
-  if (!isCover(cover)) return null;
 
   const rt = readingTime(body);
   const readingMinutes =
@@ -111,7 +102,6 @@ function buildMeta(
     excerpt,
     publishedAt,
     readingMinutes,
-    cover,
   };
 }
 

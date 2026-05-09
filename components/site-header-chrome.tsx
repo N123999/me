@@ -22,12 +22,9 @@ function isPlaceholderPathname(pathname: string): boolean {
   );
 }
 
-/** Blog 列表/详情、Mesh Lab：与首页相同 sentinel 判定 */
+/** Blog 列表/详情：与首页相同 sentinel 判定 */
 function isNavSentinelPathname(pathname: string): boolean {
-  return (
-    new RegExp(`^/(${routing.locales.join("|")})/blog(/|$)`).test(pathname) ||
-    new RegExp(`^/(${routing.locales.join("|")})/tools/mesh-lab/?$`).test(pathname)
-  );
+  return new RegExp(`^/(${routing.locales.join("|")})/blog(/|$)`).test(pathname);
 }
 
 function getBorderMode(pathname: string): BorderMode {
@@ -39,7 +36,7 @@ function getBorderMode(pathname: string): BorderMode {
 
 /**
  * 首页：大标题「Yu」顶端尚在顶栏下方可视区内时无底边线；略一上滚过顶栏即淡入。
- * Blog / Mesh Lab：面包屑首行顶边同上。
+ * Blog：面包屑首行顶边同上。
  * 占位页：始终无底边线。其余路由默认始终显示底边线。
  */
 export function SiteHeaderChrome({
@@ -101,7 +98,7 @@ function SiteHeaderChromeInner({
   return (
     <header
       className={cn(
-        "site-header sticky top-0 z-50 shrink-0 border-b bg-background pt-[env(safe-area-inset-top)] transition-[border-color] duration-300 ease-out",
+        "site-header sticky top-0 z-50 shrink-0 border-b bg-background px-5 pt-[env(safe-area-inset-top)] transition-[border-color] duration-300 ease-out sm:px-10 md:px-12",
         showBottomBorder ? "border-border" : "border-transparent",
         className,
       )}

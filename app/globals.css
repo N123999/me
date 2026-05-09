@@ -64,6 +64,10 @@ html[data-locale="zh-CN"] {
 html:not([data-theme="light"]) {
   --background: oklch(0 0 0);
   --foreground: oklch(0.985 0 0);
+  --hero-secondary: oklch(0.84 0 0);
+  --frame-line: rgb(31 31 31);
+  --frame-soft: rgb(255 255 255 / 0.07);
+  --frame-panel: rgb(255 255 255 / 0.02);
   --card: oklch(0.15 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.12 0 0);
@@ -101,6 +105,10 @@ html[data-theme="light"] {
   --radius: 0.625rem;
   --background: #ffffff;
   --foreground: oklch(0.22 0 0);
+  --hero-secondary: oklch(0.4 0 0);
+  --frame-line: rgb(31 31 31 / 0.16);
+  --frame-soft: rgb(31 31 31 / 0.08);
+  --frame-panel: rgb(31 31 31 / 0.025);
   --card: #ffffff;
   --card-foreground: oklch(0.22 0 0);
   --popover: #ffffff;
@@ -155,48 +163,191 @@ html[data-theme="light"] {
     @apply prose prose-neutral mt-10 max-w-none text-left font-sans prose-headings:text-left prose-headings:font-semibold prose-headings:tracking-tight prose-p:text-left prose-p:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-black/[0.07] prose-code:px-1 prose-code:py-0.5 prose-code:text-foreground prose-pre:bg-black/[0.04] prose-li:text-left prose-hr:border-border;
   }
 
-  /* Mesh Lab 代码块横向滚动条：与暗色画布协调，替代系统白底/箭头样式 */
-  .mesh-lab-snippet-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: oklch(0.4 0 0) oklch(0.14 0 0);
+  .home-stage-grid {
+    background-image: linear-gradient(to right, var(--frame-soft) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--frame-soft) 1px, transparent 1px);
+    background-size: calc(100% / 6) 100%, 100% calc(100% / 4);
   }
 
-  .mesh-lab-snippet-scroll::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
+  .home-hero-stage {
+    background-color: var(--background);
   }
 
-  .mesh-lab-snippet-scroll::-webkit-scrollbar-track {
-    background: oklch(0.12 0 0);
-    border-radius: 3px;
+  html[data-theme="light"] .home-hero-stage {
+    background-color: #ffffff;
   }
 
-  .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb {
-    background: oklch(0.38 0 0);
-    border-radius: 3px;
+  .project-spirit-studio-wordmark {
+    background-color: var(--project-studio-wordmark);
   }
 
-  .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.48 0 0);
+  .project-spirit-agent-preview {
+    --spirit-agent-fill-strong: rgba(255, 255, 255, 0.16);
+    --spirit-agent-fill-mid: rgba(255, 255, 255, 0.04);
+    --spirit-agent-fill-tail: rgba(220, 230, 255, 0.02);
+    --spirit-agent-inner-strong: rgba(255, 255, 255, 0.06);
+    --spirit-agent-inner-tail: rgba(200, 220, 255, 0.03);
+    --spirit-agent-fresnel-a: rgba(190, 215, 255, 0.35);
+    --spirit-agent-fresnel-b: rgba(255, 200, 200, 0.1);
+    --spirit-agent-fresnel-c: rgba(200, 255, 215, 0.1);
+    --spirit-agent-fresnel-d: rgba(215, 200, 255, 0.25);
+    --spirit-agent-stroke-main: rgba(255, 255, 255, 0.65);
+    --spirit-agent-stroke-soft: rgba(255, 255, 255, 0.2);
+    --spirit-agent-shimmer-soft: rgba(255, 255, 255, 0.035);
+    --spirit-agent-shimmer-peak: rgba(255, 255, 255, 0.065);
   }
 
-  .mesh-lab-snippet-scroll::-webkit-scrollbar-corner {
-    background: transparent;
+  html[data-theme="light"] .project-spirit-agent-preview {
+    --spirit-agent-fill-strong: rgba(31, 31, 31, 0.06);
+    --spirit-agent-fill-mid: rgba(31, 31, 31, 0.025);
+    --spirit-agent-fill-tail: rgba(31, 31, 31, 0.01);
+    --spirit-agent-inner-strong: rgba(255, 255, 255, 0.28);
+    --spirit-agent-inner-tail: rgba(31, 31, 31, 0.018);
+    --spirit-agent-fresnel-a: rgba(31, 31, 31, 0.12);
+    --spirit-agent-fresnel-b: rgba(31, 31, 31, 0.055);
+    --spirit-agent-fresnel-c: rgba(31, 31, 31, 0.045);
+    --spirit-agent-fresnel-d: rgba(31, 31, 31, 0.1);
+    --spirit-agent-stroke-main: rgba(31, 31, 31, 0.34);
+    --spirit-agent-stroke-soft: rgba(31, 31, 31, 0.1);
+    --spirit-agent-shimmer-soft: rgba(255, 255, 255, 0.2);
+    --spirit-agent-shimmer-peak: rgba(255, 255, 255, 0.34);
   }
 
-  html[data-theme="light"] .mesh-lab-snippet-scroll {
-    scrollbar-color: oklch(0.65 0 0) oklch(0.94 0 0);
+  @keyframes spirit-glass-shimmer-sweep {
+    0% {
+      transform: translateX(-350px) skewX(-18deg);
+      animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+    30% {
+      transform: translateX(350px) skewX(-18deg);
+    }
+    70% {
+      transform: translateX(350px) skewX(-18deg);
+      animation-timing-function: linear;
+    }
+    70.01% {
+      transform: translateX(-350px) skewX(-18deg);
+    }
+    100% {
+      transform: translateX(-350px) skewX(-18deg);
+    }
   }
 
-  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-track {
-    background: oklch(0.94 0 0);
+  .spirit-glass-shimmer {
+    animation: spirit-glass-shimmer-sweep 4s linear infinite;
+    will-change: transform;
   }
 
-  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb {
-    background: oklch(0.68 0 0);
+  @media (prefers-reduced-motion: reduce) {
+    .spirit-glass-shimmer {
+      animation: none;
+    }
   }
+}
 
-  html[data-theme="light"] .mesh-lab-snippet-scroll::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.52 0 0);
-  }
+html:not([data-theme="light"]) {
+  --project-studio-wordmark: #ffffff;
+  --project-preview-symbol: oklch(0.82 0 0);
+}
+
+html[data-theme="light"] {
+  --project-studio-wordmark: #333333;
+  --project-preview-symbol: #c4c4c4;
+}
+
+.project-preview-symbol {
+  color: var(--project-preview-symbol);
+}
+
+.home-hero-readable-veil {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  z-index: -1;
+  width: min(48rem, 96vw);
+  height: clamp(18rem, 46vw, 30rem);
+  transform: translate(-50%, -50%);
+  background: transparent;
+  backdrop-filter: blur(30px) saturate(118%);
+  -webkit-backdrop-filter: blur(30px) saturate(118%);
+  mask-image:
+    radial-gradient(
+      ellipse 42% 24% at 50% 28%,
+      rgb(0 0 0 / 0.98) 0%,
+      rgb(0 0 0 / 0.9) 38%,
+      rgb(0 0 0 / 0.56) 62%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 50% 32% at 50% 60%,
+      rgb(0 0 0 / 0.98) 0%,
+      rgb(0 0 0 / 0.9) 40%,
+      rgb(0 0 0 / 0.58) 66%,
+      transparent 100%
+    );
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 42% 24% at 50% 28%,
+      rgb(0 0 0 / 0.98) 0%,
+      rgb(0 0 0 / 0.9) 38%,
+      rgb(0 0 0 / 0.56) 62%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 50% 32% at 50% 60%,
+      rgb(0 0 0 / 0.98) 0%,
+      rgb(0 0 0 / 0.9) 40%,
+      rgb(0 0 0 / 0.58) 66%,
+      transparent 100%
+    );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.footer-bye-readable-veil {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: min(16rem, 62vw);
+  height: clamp(7rem, 16vw, 10rem);
+  transform: translate(-50%, -50%);
+  background: transparent;
+  backdrop-filter: blur(24px) saturate(112%);
+  -webkit-backdrop-filter: blur(24px) saturate(112%);
+  mask-image: radial-gradient(
+    ellipse 48% 36% at 50% 50%,
+    rgb(0 0 0 / 0.96) 0%,
+    rgb(0 0 0 / 0.72) 44%,
+    rgb(0 0 0 / 0.32) 66%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 48% 36% at 50% 50%,
+    rgb(0 0 0 / 0.96) 0%,
+    rgb(0 0 0 / 0.72) 44%,
+    rgb(0 0 0 / 0.32) 66%,
+    transparent 100%
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.home-hero-description {
+  color: var(--hero-secondary);
+}
+
+.home-hero-action {
+  color: inherit;
+}
+
+html[data-theme="light"] .home-hero-title {
+  color: #ffffff;
+}
+
+html[data-theme="light"] .home-hero-description,
+html[data-theme="light"] .home-hero-actions {
+  color: #ffffff;
 }
